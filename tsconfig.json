@@ -1,25 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "Node16",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "target": "ES2020", // Transpile code to ES2020 standard
+    "module": "ESNext", // Use modern ES modules
+    "strict": true, // Enable strict type checking
+    "noUnusedLocals": true, // Warn about unused variables
+    "noUnusedParameters": true, // Warn about unused function parameters
+    "sourceMap": true, // Generate source maps for debugging
+    "outDir": "dist", // Output compiled files to the "dist" folder
+    "rootDir": "src", // Set the root directory for module resolution
+    "lib": ["dom", "dom.iterable"], // Include DOM and DOM.Iterable typings
+    "jsx": "react-jsx", // Enable JSX support for React
+    "esModuleInterop": true, // Allow importing CommonJS modules in ES modules
+    "forceConsistentCasingInFileNames": true // Enforce consistent casing in file names
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"], // Include all files in the "src" folder for compilation
+  "exclude": ["node_modules"] // Exclude the "node_modules" folder
 }
