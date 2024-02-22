@@ -2,7 +2,7 @@
   "name": "demo1",
   "private": true,
   "version": "8.2.1",
-  "homepage": "https://muhammedshaikhzahid.zain.github.io",
+  "homepage": "https://MUHAMMED-SHAIKH-ZAHID.github.io/Zain.github.io",
   "type": "module",
   "scripts": {
     "predeploy":"npm run build",
