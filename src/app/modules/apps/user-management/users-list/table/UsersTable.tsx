@@ -65,7 +65,7 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
         <tr {...row.getRowProps()} key={row.id}>
           {row.cells.map((cell) => {
             return (
-              <td {...cell.getCellProps()} key={cell.column.id} className=' text-sm py-1 border-b text-start   '>
+              <td {...cell.getCellProps()} key={cell.column.id} className=' text-sm py-1 border-b'>
                 {cell.column.id === "image" ? (
                   <img src={cell.value} alt="Product" className='w-10 h-auto' />
                 ) : (
