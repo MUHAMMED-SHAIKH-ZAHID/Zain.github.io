@@ -1,4 +1,3 @@
-import React from 'react'
 import { KTCard } from '../../../_metronic/helpers'
 import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'

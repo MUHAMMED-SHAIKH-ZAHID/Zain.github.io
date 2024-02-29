@@ -1,5 +1,4 @@
-import React from 'react'
-import { ListViewProvider, useListView } from '../../../modules/apps/user-management/users-list/core/ListViewProvider';
+]import { ListViewProvider, useListView } from '../../../modules/apps/user-management/users-list/core/ListViewProvider';
 import { salesColumns } from '../../../modules/apps/user-management/users-list/table/columns/_columns';
 import { KTCard } from '../../../../_metronic/helpers';
 import { UsersTable } from '../../../modules/apps/user-management/users-list/table/UsersTable';

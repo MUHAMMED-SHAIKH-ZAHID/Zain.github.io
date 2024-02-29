@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageTitle } from '../../../_metronic/layout/core'
 import { StatisticsWidget5 } from '../../../_metronic/partials/widgets'
 

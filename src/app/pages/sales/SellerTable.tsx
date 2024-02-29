@@ -1,9 +1,5 @@
-import React from 'react'
-import { KTIcon,toAbsoluteUrl } from '../../../_metronic/helpers'
-import { Link } from 'react-router-dom'
+import { KTIcon } from '../../../_metronic/helpers'
 import { PageTitle } from '../../../_metronic/layout/core'
-import { Dropdown1 } from '../../../_metronic/partials'
-import TotalPurcahseForSuplier from '../suplier/TotalPurcahseForSuplier'
 import SellerPurchaseTable from './SellerPurchaseTable'
 
 

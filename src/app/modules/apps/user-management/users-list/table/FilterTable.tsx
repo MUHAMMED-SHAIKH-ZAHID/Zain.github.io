@@ -1,4 +1,3 @@
-import React from 'react'
 import { KTIcon } from '../../../../../../_metronic/helpers';
 // import { CiSearch } from "react-icons/ci";
 

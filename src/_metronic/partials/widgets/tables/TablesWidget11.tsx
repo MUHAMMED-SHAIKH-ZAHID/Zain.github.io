@@ -1,5 +1,4 @@
 
-import React from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../helpers'
 
 type Props = {

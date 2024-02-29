@@ -1,5 +1,5 @@
 
-import React from 'react'
+
 import {KTIcon} from '../../../helpers'
 
 type Props = {

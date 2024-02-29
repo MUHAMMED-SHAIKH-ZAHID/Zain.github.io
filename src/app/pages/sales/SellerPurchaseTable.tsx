@@ -1,4 +1,3 @@
-import React from 'react'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
 import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
 import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ProductListWrapper } from './ProductListWrapper'
 import { PageTitle } from '../../../_metronic/layout/core'
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import clsx from 'clsx'
 import {useLocation} from 'react-router'
 import {checkIsActive, KTIcon, WithChildren} from '../../../../helpers'

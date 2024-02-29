@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageTitle } from '../../../_metronic/layout/core'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
 import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
@@ -6,7 +5,7 @@ import { ListViewProvider, useListView } from '../../modules/apps/user-managemen
 import { KTCard } from '../../../_metronic/helpers'
 import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
 import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
-import { invoiceColumns, itemPurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import { itemPurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
 
 
 const InvoiceList = () => {

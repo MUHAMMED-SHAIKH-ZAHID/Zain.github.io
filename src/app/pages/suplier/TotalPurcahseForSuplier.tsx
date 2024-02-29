@@ -1,11 +1,10 @@
-import React from 'react'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
 import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
 import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
 import { KTCard } from '../../../_metronic/helpers'
 import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
 import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
-import { suplierColumns, suplierpurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import {  suplierpurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
 
 
 const SuplierList = () => {

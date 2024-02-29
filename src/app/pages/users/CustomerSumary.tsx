@@ -1,4 +1,3 @@
-import React from 'react'
 import { StatisticsWidget5 } from '../../../_metronic/partials/widgets'
 
 const CustomerSumaryCard = () => {

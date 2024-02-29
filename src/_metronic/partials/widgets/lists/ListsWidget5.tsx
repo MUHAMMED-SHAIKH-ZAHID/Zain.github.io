@@ -1,5 +1,4 @@
 
-import React from 'react'
 import {KTIcon} from '../../../helpers'
 import {Dropdown1} from '../../content/dropdown/Dropdown1'
 

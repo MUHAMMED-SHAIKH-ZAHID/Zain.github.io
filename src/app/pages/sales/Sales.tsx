@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageTitle } from '../../../_metronic/layout/core'
 import {SalesListWrapper} from './SalesListWrapper'
 
