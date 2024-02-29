@@ -1,5 +1,5 @@
 import {useListView} from '../../core/ListViewProvider'
-import {UsersListToolbar} from './UserListToolbar'
+import {UsersListToolbar} from './UserLenistToolbar'
 import {UsersListGrouping} from './UsersListGrouping'
 import {UsersListSearchComponent} from './UsersListSearchComponent'
 

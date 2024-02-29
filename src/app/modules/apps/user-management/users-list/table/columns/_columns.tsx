@@ -6,7 +6,9 @@ import {UserActionsCell} from './UserActionsCell'
 import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
 import {UserSelectionHeader} from './UserSelectionHeader'
-import {Products, Purchase, Suplier, User} from '../../core/_models'
+import {Account, ExpenceList, Expencecategory, Products, Purchase, Suplier, User} from '../../core/_models'
+import { KTIcon } from '../../../../../../../_metronic/helpers'
+import { Link } from 'react-router-dom'
 
 const usersColumns: ReadonlyArray<Column<User>> = [
   {
@@ -54,6 +56,54 @@ const usersColumns: ReadonlyArray<Column<User>> = [
 
 export {usersColumns}
 
+const invoiceColumns: ReadonlyArray<Column<Invoice>> = [
+  {
+    Header: "ID",
+    accessor: 'slNo',
+  },
+  {
+    Header: "Invoice Number",
+    accessor: 'invoiceNumber',
+  },
+  {
+    Header: "Amount",
+    accessor: 'amount',
+  },
+  {
+    Header: "Invoice Date",
+    accessor: 'invoiceDate',
+  },
+  {
+    Header: "Due Date",
+    accessor: 'dueDate',
+  },
+  {
+    Header: "Status",
+    accessor: 'status',
+    Cell: ({ row }) => {
+      // Define a mapping from order status to badge classes
+      const statusToBadgeClass = {
+        "Pending": "badge-light-warning",
+        "In Progress": "badge-light-primary",
+        "Paid": "badge-light-success",
+        "Overdue": "badge-light-danger"
+      };
+      
+      // Get the appropriate class for the current row's order status
+      const badgeClass = statusToBadgeClass[row.original.status] || "badge-light";
+  
+      return (
+        <div>
+          <span className={`badge ${badgeClass}`}>{row.original.status}</span>
+        </div>
+      );
+    }
+  },
+];
+
+export { invoiceColumns };
+
+
 
 const   suplierColumns: ReadonlyArray<Column<Suplier>> = [
  
@@ -74,16 +124,88 @@ const   suplierColumns: ReadonlyArray<Column<Suplier>> = [
     Header: "Location",
     accessor: 'location',
   },
+  {
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+        <Link to='/supplier/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+          <KTIcon iconName='switch' className='fs-3' />
+        </Link>
+        <a
+          href='#'
+          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+        >
+          <KTIcon iconName='pencil' className='fs-3' />
+        </a>
+        <a
+          href='#'
+          className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+        >
+          <KTIcon iconName='trash' className='fs-3' />
+        </a>
+      </div>
+    ),
+  }
+  
  
 ]
 
 export {suplierColumns}
-
-
-const   purchaseColumns: ReadonlyArray<Column<Purchase>> = [
+const   userColumns: ReadonlyArray<Column<Suplier>> = [
+ 
   {
-    Header:"Product ID",
-    accessor:'purchaseID'
+    Header:"Full Name",
+    id: 'names',
+    accessor:'name'
+  },
+  {
+    Header: "Email",
+    accessor: 'email',
+  },
+  {
+    Header:"Company",
+    accessor: 'company',
+  },
+  {
+    Header: "Location",
+    accessor: 'location',
+  },
+  {
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+        <Link to='/customer/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+          <KTIcon iconName='switch' className='fs-3' />
+        </Link>
+        <a
+          href='#'
+          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+        >
+          <KTIcon iconName='pencil' className='fs-3' />
+        </a>
+        <a
+          href='#'
+          className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+        >
+          <KTIcon iconName='trash' className='fs-3' />
+        </a>
+      </div>
+    ),
+  }
+  
+ 
+]
+
+export {userColumns}
+
+
+const   productColumns: ReadonlyArray<Column<Purchase>> = [
+  {
+    Header:" ID",
+    accessor:'purchaseID',
+    width:200
   },
   // {
   //   Header: "Generated Date",
@@ -92,19 +214,40 @@ const   purchaseColumns: ReadonlyArray<Column<Purchase>> = [
   {
     Header:"Product name",
     accessor: 'suppliername',
+    width:200
   },
   // {
   //   Header: "Purchase Status",
   //   accessor: 'purchasestatus',
   // },
- 
+  {
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+      
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-primary  btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </a>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-danger  btn-sm'
+      >
+        <KTIcon iconName='trash' className='fs-3' />
+      </a>
+    </div>
+    ),
+  },
 ]
 
-export {purchaseColumns}
+export {productColumns}
 
 const salesColumns  = (handleActionClick: (rowData: Purchase) => void): Column<Purchase>[] => [
   {
-    Header: "Order ID",
+    Header: "ID",
     accessor: 'orderID',
   },
   {
@@ -118,12 +261,49 @@ const salesColumns  = (handleActionClick: (rowData: Purchase) => void): Column<P
   {
     Header: "Order Status",
     accessor: 'orderStatus',
-  },
+      Cell: ({ row }) => {
+        // Define a mapping from order status to badge classes
+        const statusToBadgeClass = {
+          "Pending": "badge-light-warning",
+          "In Progress": "badge-light-primary",
+          "Completed": "badge-light-success",
+          "Cancelled": "badge-light-danger"
+        };
+        
+        // Get the appropriate class for the current row's order status
+        const badgeClass = statusToBadgeClass[row.original.orderStatus] || "badge-light";
+    
+        return (
+          <div>
+            <span className={`badge ${badgeClass}`}>{row.original.orderStatus}</span>
+          </div>
+        );
+      }
+  }
+  
+  ,
+  
   {
     Header: "Actions",
     accessor: "actions",
     Cell: ({ row }) => (
-      <button className='btn btn-dark btn-sm' onClick={() =>( handleActionClick(row.original))} >Action</button>
+      <div className='d-flex justify-content-end'>
+       <Link to='/sales/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+          <KTIcon iconName='switch' className='fs-3' />
+        </Link>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </a>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+      >
+        <KTIcon iconName='trash' className='fs-3' />
+      </a>
+    </div>
     ),
   },
 ];
@@ -133,46 +313,229 @@ export {salesColumns}
 
 const productsColumns: ReadonlyArray<Column<Products>> = [
   {
-    Header: "Name",
-    accessor: 'name',
+    Header: "Id",
+    accessor: 'id',
   },
+
   {
-    Header: "SKU",
-    accessor: 'sku',
-  },
-  {
-    Header: "Sale Price",
-    accessor: 'salePrice',
+    Header: "Suplier Name",
+    accessor: 'supliername',
   },
   {
     Header: "Purchase Price",
     accessor: 'purchasePrice',
-  },
-  {
-    Header: "Tax",
-    accessor: 'tax',
+    Cell:({row}) => {
+      return (  <div className=''>
+        <span className={`   `}> &nbsp; {row.original.purchasePrice}</span>
+      </div>)
+    }
   },
   {
     Header: "Category",
     accessor: 'category',
   },
   {
-    Header: "Supplier",
-    accessor: 'supplier',
-  },
-  {
-    Header: "Brand",
-    accessor: 'brand',
-  },
-  {
-    Header: "Stock Count",
-    accessor: 'StockCount',
-  },
-  {
-    Header: "Stock Status",
-    accessor: 'stockStatus',
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+       <Link to='#' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+          <KTIcon iconName='switch' className='fs-3' />
+        </Link>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </a>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+      >
+        <KTIcon iconName='trash' className='fs-3' />
+      </a>
+    </div>
+    ),
   },
 ];
 
 export { productsColumns };
 
+
+const   AccountColumns: ReadonlyArray<Column<Account>> = [
+ 
+  {
+    Header:"Date",
+    id: 'names',
+    accessor:'date'
+  },
+  {
+    Header: "Account Mode",
+    accessor: 'expense',
+  },
+  {
+    Header:"Amount",
+    accessor: 'amount',
+  },
+  {
+    Header: "Category",
+    accessor: 'category',
+  },
+ 
+]
+
+export {AccountColumns}
+
+
+const   ExpenceCategoryColumns: ReadonlyArray<Column<Expencecategory>> = [
+ 
+  {
+    Header:"id",
+    id: 'id',
+    accessor:'id'
+  },
+  {
+    Header: "Expence Category",
+    accessor: 'expensecategory',
+  },
+ 
+]
+
+export {ExpenceCategoryColumns}
+
+const ExpenceColumns: ReadonlyArray<Column<ExpenceList>> = [
+  {
+    Header: "Sl no",
+    accessor: "slNo", // Accessor matches the property in the FinancialRecord
+  },
+  {
+    Header: "Main Category",
+    accessor: "mainCategory",
+  },
+  {
+    Header: "Sub Category",
+    accessor: "subCategory",
+  },
+  {
+    Header: "Amount",
+    accessor: "amount",
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+  },
+  {
+    Header: "Remarks",
+    accessor: "remarks",
+  },
+];
+
+export { ExpenceColumns };
+
+
+
+
+interface PurchaseData {
+  date: string;
+  purchaseNo: string;
+  purchaseAmount: number;
+}
+
+const suplierpurchaseColumns: ReadonlyArray<Column<PurchaseData>> = [
+  {
+    Header: "Date",
+    accessor: 'date', // accessor is the "key" in the data
+  },
+  {
+    Header: "Purchase No",
+    accessor: 'purchaseNo',
+  },
+  {
+    Header: "Purchase Amount",
+    accessor: 'purchaseAmount',
+    // You can format the amount here, e.g., to show it as currency
+    Cell: ({ value }) => `${value.toFixed(2)}`,
+  },
+  {
+    Header: "Preview",
+    accessor: 'preview',
+    Cell:({row}) => {
+      return (
+        <div className="d-flex ms-5">
+       <Link  to={'/supplier/profile/spurchase'} >
+
+        <KTIcon iconName='eye' className='fs-3' /> 
+        </Link>
+        </div>
+      )
+    }
+  },
+];
+
+export { suplierpurchaseColumns };
+const sellerpurchaseColumns: ReadonlyArray<Column<PurchaseData>> = [
+  {
+    Header: "Date",
+    accessor: 'date', // accessor is the "key" in the data
+  },
+  {
+    Header: "Sale No",
+    accessor: 'purchaseNo',
+  },
+  {
+    Header: "Sale Amount",
+    accessor: 'purchaseAmount',
+    // You can format the amount here, e.g., to show it as currency
+    Cell: ({ value }) => `${value.toFixed(2)}`,
+  },
+  {
+    Header: "Preview",
+    accessor: 'preview',
+    Cell:({row}) => {
+      return (
+        <div className="d-flex ms-5">
+        <KTIcon iconName='eye' className='fs-3' />
+        </div>
+      )
+    }
+  },
+];
+
+export { sellerpurchaseColumns };
+
+interface ItemPurchaseData {
+  item: string;
+  price: number; // Price per item
+  quantity: number;
+  total: number; // Total cost (price * quantity)
+}
+
+
+
+const itemPurchaseColumns: ReadonlyArray<Column<ItemPurchaseData>> = [
+  {
+    Header: "Item",
+    accessor: 'item',
+  },
+  {
+    Header: "Price",
+    accessor: 'price',
+    Cell: ({ value }) => `${value.toFixed(2)}`, 
+  },
+  {
+    Header: "Quantity",
+    accessor: 'quantity',
+    Cell: ({ value }) => `${value} pcs`, 
+  },
+  {
+    Header: "Total",
+    accessor: 'total',
+    Cell: ({ row }) => {
+      
+      const total = row.original.price * row.original.quantity;
+      return `${total.toFixed(2)}`;
+    },
+  },
+];
+
+export { itemPurchaseColumns };

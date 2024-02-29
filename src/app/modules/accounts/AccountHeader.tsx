@@ -29,14 +29,7 @@ const AccountHeader: FC = () => {
                   <a href='#'>
                     <KTIcon iconName='verify' className='fs-1 text-primary' />
                   </a>
-                  <a
-                    href='#'
-                    className='btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3'
-                    data-bs-toggle='modal'
-                    data-bs-target='#kt_modal_upgrade_plan'
-                  >
-                    Upgrade to Pro
-                  </a>
+                 
                 </div>
 
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
@@ -68,7 +61,7 @@ const AccountHeader: FC = () => {
                 <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTIcon iconName='check' className='fs-3 d-none' />
 
-                  <span className='indicator-label'>Follow</span>
+                  <span className='indicator-label'>Edit</span>
                   <span className='indicator-progress'>
                     Please wait...
                     <span className='spinner-border spinner-border-sm align-middle ms-2'></span>

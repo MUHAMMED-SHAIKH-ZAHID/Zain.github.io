@@ -13,13 +13,26 @@ import { UserEditModal } from '../../modules/apps/user-management/users-list/use
 const ProductList = () => {
   const {itemIdForUpdate} = useListView()
   const Data = [
-    {name: "Product A", sku: "SKU001", salePrice: "15.00", purchasePrice: "10.00", tax: "5%", category: "Electronics", supplier: "Supplier A", brand: "Brand A", unitsPerPack: 10, StockCount: 100, stockStatus: "In Stock"},
-    {name: "Product B", sku: "SKU002", salePrice: "25.00", purchasePrice: "20.00", tax: "5%", category: "Home Appliances", supplier: "Supplier B", brand: "Brand B", unitsPerPack: 5, StockCount: 50, stockStatus: "In Stock"},
-    {name: "Product C", sku: "SKU003", salePrice: "30.00", purchasePrice: "25.00", tax: "10%", category: "Computers", supplier: "Supplier C", brand: "Brand C", unitsPerPack: 20, StockCount: 75, stockStatus: "Low Stock"},
-    {name: "Product D", sku: "SKU004", salePrice: "40.00", purchasePrice: "30.00", tax: "7%", category: "Mobile Phones", supplier: "Supplier D", brand: "Brand D", unitsPerPack: 15, StockCount: 60, stockStatus: "In Stock"},
-    {name: "Product E", sku: "SKU005", salePrice: "50.00", purchasePrice: "35.00", tax: "8%", category: "Gaming", supplier: "Supplier E", brand: "Brand E", unitsPerPack: 10, StockCount: 40, stockStatus: "In Stock"},
-    {name: "Product F", sku: "SKU006", salePrice: "55.00", purchasePrice: "45.00", tax: "9%", category: "Furniture", supplier: "Supplier F", brand: "Brand F", unitsPerPack: 8, StockCount: 30, stockStatus: "Low Stock"},
-    {name: "Product G", sku: "SKU007", salePrice: "60.00", purchasePrice: "50.00", tax: "5%", category: "Outdoor", supplier: "Supplier G", brand: "Brand G", unitsPerPack: 20, StockCount: 25, stockStatus: "In Stock"},
+    { id: '1', supliername: 'Supplier A', purchasePrice: '100', category: 'Electronics', Quantity: '50' },
+    { id: '2', supliername: 'Supplier B', purchasePrice: '150', category: 'Clothing', Quantity: '70' },
+    { id: '3', supliername: 'Supplier C', purchasePrice: '200', category: 'Groceries', Quantity: '30' },
+    { id: '4', supliername: 'Supplier D', purchasePrice: '250', category: 'Electronics', Quantity: '40' },
+    { id: '5', supliername: 'Supplier E', purchasePrice: '300', category: 'Toys', Quantity: '90' },
+    { id: '6', supliername: 'Supplier F', purchasePrice: '350', category: 'Books', Quantity: '120' },
+    { id: '7', supliername: 'Supplier G', purchasePrice: '400', category: 'Clothing', Quantity: '60' },
+    { id: '8', supliername: 'Supplier H', purchasePrice: '450', category: 'Electronics', Quantity: '80' },
+    { id: '9', supliername: 'Supplier I', purchasePrice: '500', category: 'Groceries', Quantity: '20' },
+    { id: '10', supliername: 'Supplier J', purchasePrice: '550', category: 'Toys', Quantity: '110' },
+    { id: '11', supliername: 'Supplier K', purchasePrice: '600', category: 'Books', Quantity: '130' },
+    { id: '12', supliername: 'Supplier L', purchasePrice: '650', category: 'Clothing', Quantity: '55' },
+    { id: '13', supliername: 'Supplier M', purchasePrice: '700', category: 'Electronics', Quantity: '45' },
+    { id: '14', supliername: 'Supplier N', purchasePrice: '750', category: 'Groceries', Quantity: '35' },
+    { id: '15', supliername: 'Supplier O', purchasePrice: '800', category: 'Toys', Quantity: '95' },
+    { id: '16', supliername: 'Supplier P', purchasePrice: '850', category: 'Books', Quantity: '125' },
+    { id: '17', supliername: 'Supplier Q', purchasePrice: '900', category: 'Clothing', Quantity: '65' },
+    { id: '18', supliername: 'Supplier R', purchasePrice: '950', category: 'Electronics', Quantity: '85' },
+    { id: '19', supliername: 'Supplier S', purchasePrice: '1000', category: 'Groceries', Quantity: '25' },
+    { id: '20', supliername: 'Supplier T', purchasePrice: '1050', category: 'Toys', Quantity: '115' },
   ];
   
 

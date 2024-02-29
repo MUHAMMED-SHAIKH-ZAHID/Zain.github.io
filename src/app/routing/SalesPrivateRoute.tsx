@@ -13,30 +13,15 @@ import Users from '../pages/users/Customer'
 import Reports from '../pages/reports/Reports'
 import { Account } from '../modules/profile/components/account/Account'
 import Products from '../pages/products/Products'
-import Sales from '../pages/sales/Sales'
+import Sales from '../pages/salespages/sales/Sales'
 import CreateSales from '../pages/sales/CreateSales'
 import AddSales from '../pages/sales/AddSales'
 import AddProducts from '../pages/products/AddProducts'
 import AddPurchase from '../pages/purchase/AddPurchase'
-import Customer from '../pages/users/Customer'
-import RecentInvoice from '../pages/dashboard/RecentInvoice'
-import AddRecentInvoice from '../pages/dashboard/AddRecentInvoice'
-import CustomerSumary from '../pages/users/CustomerSumary'
-import CustomerQuote from '../pages/users/CustomerQuote'
-import SupplierSumary from '../pages/suplier/SupplierSumary'
-import SuplierQuote from '../pages/suplier/SuplierQuote'
-import SalesSumary from '../pages/salespages/sales/SalesSumary'
-import AccountSumary from '../pages/account/AccountSumary'
-import AccountTable from '../pages/account/AccountTable'
-import ExpenceCategory from '../pages/account/ExpenceCategory'
-import ExpenseList from '../pages/account/ExpenseList'
-import SupplierProfile from '../pages/suplier/SupplierProfile'
-import SalesProfile from '../pages/sales/SellerTable'
-import CustomerProfile from '../pages/users/CustomerProfile'
-import SinglePurchaseDetails from '../pages/suplier/SinglePurchaseDetails'
+import Customer from '../pages/salespages/customer/Customer'
+import { SalesMasterLayout } from '../../_metronic/layout/SalesMasterLayout'
 
-
-const PrivateRoutes = () => {
+const SalesPrivateRoute = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
@@ -46,49 +31,19 @@ const PrivateRoutes = () => {
 
   return (
     <Routes>
-      <Route element={<MasterLayout />}>
+      <Route element={<SalesMasterLayout />}>
         {/* Redirect to Dashboard after success login/registartion */}
-        <Route path='auth/*' element={<Navigate to='/dashboard' />} />
+        <Route path='auth/*' element={<Navigate to='/sales-dashboard' />} />
         {/* Pages */}
-
-        {/* Dashbord */}
-        <Route path='/dashboard' element={<DashboardWrapper />} />
-        <Route path='/dashboard/addrecentinvoice' element={<AddRecentInvoice />} />
-    
-
-        {/* Splier */}
-        <Route path='/supplier' element={<Suplier/>} />
-        <Route path='/supplier/profile' element={<SupplierProfile /> } />
-        <Route path='/supplier/profile/spurchase' element={<SinglePurchaseDetails /> } />
-
-  
-
-        <Route path='/purchase' element={<Purchase />} />
-        <Route path='/products' element={<Products />} />
-
-        {/* customer */}
-        <Route path='/customer' element={<Customer />} />
-        <Route path='/customer/profile' element={<CustomerProfile />} />
-   
-
-
+        <Route path='sales-dashboard' element={<DashboardWrapper />} />
+       
+        <Route path='sales/customer' element={<Customer />} />
         <Route path='/reports' element={<Reports />} />
-        {/* Sales */}
-        <Route path='/sales' element={<Sales />} />
-        <Route path='/sales/profile' element={<SalesProfile />} />
-     
-
+        <Route path='/sales/salepage' element={<Sales />} />
         <Route path='/createsales' element={<CreateSales />} />
         <Route path='/addsales' element={<AddSales />} />
         <Route path='/addpurchase' element={<AddPurchase />} />
-
-        {/* Account */}
-        <Route path='/account' element={<AccountTable />} />
-        <Route path='/account/table' element={<AccountTable />} />
-        <Route path='/account/sumary' element={<AccountSumary />} />
-        <Route path='/account/expensecategory' element={<ExpenceCategory />} />
-        <Route path='/account/expenselist' element={<ExpenseList />} />
-
+        <Route path='/account' element={<Account />} />
         <Route path='/builder' element={<BuilderPageWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
@@ -159,4 +114,4 @@ const SuspensedView: FC<WithChildren> = ({children}) => {
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>
 }
 
-export {PrivateRoutes}
+export {SalesPrivateRoute}

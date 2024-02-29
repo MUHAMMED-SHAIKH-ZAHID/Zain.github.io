@@ -73,7 +73,7 @@ const ChartsWidget1: FC<Props> = ({className}) => {
       {/* begin::Body */}
       <div className='card-body'>
         {/* begin::Chart */}
-        <div ref={chartRef} id='kt_charts_widget_1_chart' style={{height: '350px'}} />
+        <div ref={chartRef} id='kt_charts_widget_1_chart'  style={{height: '350px', width:'60rem'}} />
         {/* end::Chart */}
       </div>
       {/* end::Body */}
@@ -111,7 +111,7 @@ function getChartOptions(height: number): ApexOptions {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '30%',
+        columnWidth: '20%',
         borderRadius: 5,
       },
     },

@@ -35,22 +35,23 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
   }, [])
   return (
     <KTCardBody className='py-4'>
-     <div className='d-flex justify-content-between border-0 pt-6'>
+     <div className='d-flex justify-content-between border-0 pt-6 '>
 <FilterTable filter={globalFileter} setFilter={setGlobalFilter} />
 <UsersListToolbar Title={Title} />
 </div>
       <div className='table-responsive'>
          <table
           id='kt_table_users'
-          className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
+          style={{width:"100%"}}
+          className='table  align-middle table-row-dashed fs-6 gy-4  dataTable no-footer'
            {...getTableProps()}
          >
           <thead>
           {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+          <tr className='' {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()} scope='col' className=' text-start text-muted fw-bolder fs-7 text-uppercase gs-0' key={column.id}>
-                {column.render('Header')}
+              <th {...column.getHeaderProps()} scope='col' className={` text-dark fw-bolder fs-7 text-uppercase gs-0 ${column.id === "actions" ? 'text-end pe-8'  : 'text-start '}`} key={column.id}>
+             {column.render('Header')}
               </th>
             ))}
           </tr>
@@ -64,7 +65,7 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
         <tr {...row.getRowProps()} key={row.id}>
           {row.cells.map((cell) => {
             return (
-              <td {...cell.getCellProps()} key={cell.column.id} className='px-6 text-sm py-2 border-b text-left'>
+              <td {...cell.getCellProps()} key={cell.column.id} className=' text-sm py-1 border-b text-start   '>
                 {cell.column.id === "image" ? (
                   <img src={cell.value} alt="Product" className='w-10 h-auto' />
                 ) : (
@@ -94,16 +95,16 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
         </table>
       </div>
       <div className="d-flex justify-content-end p-5 gap-5">
-        <button className="bg-light rounded py-2 border text-dark fw-bold p-2" disabled={!canPreviousPage} onClick={()=>previousPage()}>Previous</button>
+        <button className="bg-light rounded py-2 border text-dark fw-bold p-2 " disabled={!canPreviousPage} onClick={()=>previousPage()}>Previous</button>
         {/* <div className="">{pageIndex+ 1}</div> */}
-        <button className={` rounded  border p-2 ${pageIndex == 0 ? "bg-black  text-white" : "bg-[#EEEEEE]"}`} onClick={()=>gotoPage(0)}>1</button>
+        <button className={` rounded  border p-3 py-2 ${pageIndex == 0 ? "bg-black  text-white" : "bg-[#EEEEEE]"}`} onClick={()=>gotoPage(0)}>1</button>
       {console.log(pageCount,pageIndex,pageSize,"1234567890-")}
         {
   pageOptions.length >= 2  &&
   (pageIndex + 1 !== 1 && pageIndex + 1 !== pageCount ) ? (
 
     <button 
-      className={`rounded border p-2 ${pageIndex === pageIndex ? "bg-black text-white" : "bg-[#EEEEEE]"}`} 
+      className={`rounded border p-3 py-2${pageIndex === pageIndex ? "bg-black text-white" : "bg-[#EEEEEE]"}`} 
     //   onClick={() => gotoPage(pageIndex + 1)} // Assuming you want to navigate to the next page
     >
       {pageIndex + 1}
@@ -114,11 +115,11 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
   
 }
 {
-    pageOptions.length !==1 &&         <button className={` rounded  border p-2 ${pageIndex == pageCount-1 ? "bg-black  text-white" : "bg-[#EEEEEE]"}`}  disabled={!canNextPage} onClick={()=>gotoPage(pageCount-1)}>{pageOptions.length}</button>
+    pageOptions.length !==1 &&         <button className={` rounded  border py-2 p-3 ${pageIndex == pageCount-1 ? "bg-black  text-white" : "bg-[#EEEEEE]"}`}  disabled={!canNextPage} onClick={()=>gotoPage(pageCount-1)}>{pageOptions.length}</button>
 
 
 }
-        <button className="bg-light rounded py-2 border text-dark fw-bold p-2" style={{backgroundColor: '#EEEEEE'}} disabled={!canNextPage} onClick={()=>nextPage()}>Next </button>
+        <button className="bg-light rounded py-2 border text-dark fw-bold p-2 " style={{backgroundColor: '#EEEEEE'}} disabled={!canNextPage} onClick={()=>nextPage()}>Next </button>
     </div>
       {/* <UsersListPagination /> */}
       

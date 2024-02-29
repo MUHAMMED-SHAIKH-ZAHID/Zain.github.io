@@ -183,7 +183,7 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                 </td>
                 <td className='text-gray-900 fw-bold text-hover-primary fs-6'>$3560</td>
                 <td>
-                  <span className='badge badge-light-success'>Approved</span>
+                  <span className='badge badge-light-success'></span>
                 </td>
                 <td className='text-end'>
                   <a

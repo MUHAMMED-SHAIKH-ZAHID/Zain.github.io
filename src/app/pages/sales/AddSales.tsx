@@ -169,15 +169,11 @@ const AddSaleswrap : React.FC = () => {
     <textarea className="form-control" id="notes" rows="3" placeholder="Notes"></textarea>
   </div>
 
-  {/* Preview and Download Buttons */}
-  <div className="d-flex justify-content-center gap-5 mb-3">
-    <button className="btn btn-primary me-2" type="button">Preview</button>
-    <button className="btn btn-secondary" type="button">Download</button>
-  </div>
+
 
   {/* Send Invoice Button */}
-  <div className="d-flex justify-content-center">
-    <button className="btn btn-success" type="button">Send Invoice</button>
+  <div className="d-flex justify-content-center mt-5">
+    <button className="btn btn-dark" type="button">Create Sale</button>
   </div>
 </div>
 

@@ -3,7 +3,7 @@ import {KTIcon} from '../../../../helpers'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
 import {SidebarMenuItem} from './SidebarMenuItem'
 
-const SidebarMenuMain = () => {
+const SalesSidebarMenuMain = () => {
   const intl = useIntl()
 
   return (
@@ -14,62 +14,48 @@ const SidebarMenuMain = () => {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
-   
-            <SidebarMenuItem
+            {/* <SidebarMenuItem
               to='/supplier'
               icon='profile-user'
-              title='Supplier'
+              title='Suplier'
               fontIcon='bi-app-indicator'
             />
-           
-          
           <SidebarMenuItem
             to='/products'
             icon='office-bag'
             title='Products'
             fontIcon='bi-app-indicator'
           />
-
         <SidebarMenuItem
           to='/purchase'
           icon='office-bag'
           title='Purchase'
           fontIcon='bi-app-indicator'
-        />
+        /> */}
           <SidebarMenuItem
-            to='/customer'
+            to='sales/customer'
             icon='profile-circle'
             title='Customer'
             fontIcon='bi-app-indicator'
           />
-       
-
         <SidebarMenuItem
-          to='/sales'
+          to='/sales/salepage'
           icon='binance-usd'
           title='Sales'
           fontIcon='bi-app-indicator'
         />
-     
-        
-        
-        <SidebarMenuItem
+        {/* <SidebarMenuItem
           to={(e)=>e.preventDefault()}
           icon='search-list'
           title='Reports'
           fontIcon='bi-app-indicator'
-        />
-      <SidebarMenuItemWithSub
-        to='/account'
+        /> */}
+      <SidebarMenuItem
+        to={(e)=>e.preventDefault()}
         icon='binance-usd'
         title='Account'
         fontIcon='bi-app-indicator'
-      >
-        <SidebarMenuItem to='/account/table' title='Accounts List' hasBullet={true} />
-        <SidebarMenuItem to='/account/sumary' title='Overview' hasBullet={true} />
-        <SidebarMenuItem to='/account/expensecategory' title='Expence Category' hasBullet={true} />
-        <SidebarMenuItem to='/account/expenselist' title='Expence List' hasBullet={true} />
-      </SidebarMenuItemWithSub>
+      />
       {/* <SidebarMenuItem
         to='/addproduct'
         icon='search-list'
@@ -148,14 +134,23 @@ const SidebarMenuMain = () => {
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Apps</span>
         </div>
-      </div> */}
-      {/* <SidebarMenuItemWithSub
+      </div>
+      <SidebarMenuItemWithSub
         to='/apps/chat'
         title='Chat'
         fontIcon='bi-chat-left'
         icon='message-text-2'
       >
-     
+        <SidebarMenuItem to='/apps/chat/private-chat' title='Private Chat' hasBullet={true} />
+        <SidebarMenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
+        <SidebarMenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
+      </SidebarMenuItemWithSub>
+      <SidebarMenuItem
+        to='/apps/user-management/users'
+        icon='abstract-28'
+        title='User management'
+        fontIcon='bi-layers'
+      />
       <div className='menu-item'>
         <a
           target='_blank'
@@ -174,10 +169,8 @@ const SidebarMenuMain = () => {
         title='User management'
         fontIcon='bi-layers'
       /> */}
-      
-      
     </>
   )
 }
 
-export {SidebarMenuMain}
+export {SalesSidebarMenuMain}

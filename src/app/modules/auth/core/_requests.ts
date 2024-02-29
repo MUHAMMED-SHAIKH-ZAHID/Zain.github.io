@@ -7,9 +7,13 @@ export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/verify_token`;
 export const LOGIN_URL = `${API_URL}/login`;
 export const REGISTER_URL = `${API_URL}/register`;
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
+console.log(API_URL,{API_URL},"debugging to check how this program works")
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
+  console.log(API_URL,{API_URL},"debugging to check how this program works ssssssssssssssssssssssssssssssssssssss")
+  
+
   return axios.post<AuthModel>(LOGIN_URL, {
     email,
     password,

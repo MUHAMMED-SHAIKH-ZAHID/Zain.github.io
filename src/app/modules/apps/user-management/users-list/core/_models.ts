@@ -23,6 +23,29 @@ export type Suplier = {
   company?:string
   location?:string
 }
+export type Account = {
+  date?:string
+  expense?:string
+  amount?:number
+  category?:string
+}
+export type Expencecategory = {
+  id?:string
+  expencecategory?:string
+}
+
+export type ExpenceList = {
+  slNo: number;
+  date: string; 
+  amount: number; 
+  remarks: string;
+  mainCategory: string;
+  subCategory: string;
+}
+
+
+
+
 export type Purchase = {
   id?: ID
   purchaseID?: string

@@ -25,6 +25,16 @@ const initialValues = {
   password: 'demo',
 }
 
+const Data = [{
+  email: 'admin@demo.com',
+  password: 'demo',
+  role:"admin"
+},
+{
+  email: 'sales@demo.com',
+  password: '1234',
+  role:"sales"
+}]
 /*
   Formik+YUP+Typescript:
   https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
@@ -41,10 +51,26 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        const {data: auth} = await login(values.email, values.password)
-        saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.api_token)
-        setCurrentUser(user)
+        const user = Data.find(u => u.email === values.email && u.password === values.password);
+        if (!user) {
+          throw new Error('User not found or password does not match');
+        }
+
+        const auth = {api_token:    "$2y$10$qyWRyuvGf4t9hAOndcV.vu.9ro6LFObwA5ovBoUtmB2ja4i9ipKAW",
+        email:user.email,
+        role:user.role
+       
+      }
+      console.log(auth,"hkjlkjhhjkljhhkl")
+      saveAuth(auth)
+      setCurrentUser(auth)
+      
+        
+        // const {data: auth} = await login(values.email, values.password)
+        // saveAuth(auth)
+        // const {data: user} = await getUserByToken(auth.api_token)
+        // console.log(user,"sdfghjki want to make sure")
+        // setCurrentUser(user)
       } catch (error) {
         console.error(error)
         saveAuth(undefined)

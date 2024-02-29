@@ -1,11 +1,10 @@
 import React from 'react'
 import { KTCard } from '../../../_metronic/helpers'
-import { UsersListHeader } from '../../modules/apps/user-management/users-list/components/header/UsersListHeader'
 import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
 import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
 import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
-import { purchaseColumns, suplierColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import { productColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
 import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
 
 
@@ -109,7 +108,7 @@ const Data = [
   return (
     <>
       <KTCard>
-        <UsersTable column={purchaseColumns} Data={Data} Title={'Product'} />
+        <UsersTable column={productColumns} Data={Data} Title={'Product'} />
       </KTCard>
       {itemIdForUpdate !== undefined && <UserEditModal />}
     </>

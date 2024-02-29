@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { PageTitle } from '../../../_metronic/layout/core';
+import { PageTitle } from '../../../../_metronic/layout/core';
 
 interface Item {
     id: number;
@@ -10,7 +10,7 @@ interface Item {
     price: number;
   }
 
-const AddPurchaseWrap : React.FC = () => {
+const AddSaleswrap : React.FC = () => {
     const [items, setItems] = useState<Item[]>([
       { id: Date.now(), name: '', qty: 1, price: 0 },
     ]);
@@ -39,23 +39,7 @@ const AddPurchaseWrap : React.FC = () => {
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [invoiceNumber, setInvoiceNumber] = useState<string>('2021001');
 
-  const suplier = [
-    { id: 'user1', name: 'User 1' },
-    { id: 'user2', name: 'User 2' },
-    // Add more users as needed
-  ];
   
-  const products = [
-    { id: 'prod1', name: 'Product 1' },
-    { id: 'prod2', name: 'Product 2' },
-    // Add more products as needed
-  ];
-  
-  const categories = [
-    { id: 'cat1', name: 'Category 1' },
-    { id: 'cat2', name: 'Category 2' },
-    // Add more categories as needed
-  ];
 
   return (
     <div className=" card p-5">
@@ -72,7 +56,7 @@ const AddPurchaseWrap : React.FC = () => {
 
       {/* Invoice Number */}
       <div className="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" title="Enter invoice number">
-        <span className="fs-2x fw-bold text-gray-800 me-2">Purchase </span>
+        <span className="fs-2x fw-bold text-gray-800 me-2">Sales </span>
         <input 
           type="text" 
           className="form-control form-control-flush fw-bold text-muted fs-3 w-125px" 
@@ -92,44 +76,45 @@ const AddPurchaseWrap : React.FC = () => {
       </div>
       </div>
       <div className="container py-10">
-      <div className="row col-lg-12 mb-3">
+  <div className="row mb-3">
+    <div className="col-lg-4">
+      <label htmlFor="customerName" className="form-label">Customer Name</label>
+      <input type="text" className="form-control" id="customerName" />
+    </div>
+    <div className="col-lg-4">
+      <label htmlFor="supplier" className="form-label">Supplier</label>
+      <input type="text" className="form-control" id="supplier" />
+    </div>
+    <div className="col-lg-4">
+      <label htmlFor="categories" className="form-label">Categories</label>
+      <select className="form-select" id="categories">
+        <option selected>Choose...</option>
+        <option value="1">Category 1</option>
+        <option value="2">Category 2</option>
+      </select>
+    </div>
+  </div>
 
-        {/* <div className="col-lg-6">
-          <label htmlFor="product" className="form-label">Product</label>
-          <select className="form-select" id="product">
-            <option selected>Choose...</option>
-            {products.map(product => (
-              <option key={product.id} value={product.name}>{product.name}</option>
-            ))}
-          </select>
-        </div> */}
-        <div className="col-lg-4">
-          <label htmlFor="user" className="form-label">Suplier</label>
-          <select className="form-select" id="suplier">
-            <option selected>Choose...</option>
-            {suplier.map(suplier => (
-              <option key={suplier.id} value={suplier.name}>{suplier.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className="col-lg-4">
-          <label htmlFor="categories" className="form-label">Categories</label>
-          <select className="form-select" id="categories">
-            <option selected>Choose...</option>
-            {categories.map(category => (
-              <option key={category.id} value={category.name}>{category.name}</option>
-            ))}
-          </select>
-        </div>
-        <div className="col-lg-4">
-        <label htmlFor="brand" className="form-label">Brand</label>
-          <input type="text" className="form-control" id="brand" />
-          </div>
+  <div className="row mb-3">
+    <div className="col-lg-4">
+      <label htmlFor="brand" className="form-label">Brand</label>
+      <input type="text" className="form-control" id="brand" />
+    </div>
 
-        </div>
+    <div className="col-lg-4">
+      <label htmlFor="orderStatus" className="form-label">Order Status</label>
+      <select className="form-select" id="orderStatus">
+        <option selected>Choose...</option>
+        <option value="1">Pending</option>
+        <option value="2">Processing</option>
+        <option value="3">Shipped</option>
+        <option value="4">Delivered</option>
+        <option value="5">Cancelled</option>
+      </select>
+    </div>
+  </div>
 </div>
 
-        
       <div className="container mt-5">
       <table className="table ">
         <thead>
@@ -185,11 +170,14 @@ const AddPurchaseWrap : React.FC = () => {
   </div>
 
   {/* Preview and Download Buttons */}
-
+  <div className="d-flex justify-content-center gap-5 mb-3">
+    <button className="btn btn-primary me-2" type="button">Preview</button>
+    <button className="btn btn-secondary" type="button">Download</button>
+  </div>
 
   {/* Send Invoice Button */}
-  <div className="d-flex justify-content-center pt-5">
-    <button className="btn btn-dark" type="button">Create Purchase</button>
+  <div className="d-flex justify-content-center">
+    <button className="btn btn-success" type="button">Send Invoice</button>
   </div>
 </div>
 
@@ -202,17 +190,13 @@ const AddPurchaseWrap : React.FC = () => {
 
 
 
-
-
-
-
-const AddPurchase = () => {
+const AddSales = () => {
   return (
- <>
-       <PageTitle breadcrumbs={[]}>{'Add Purchase'}</PageTitle>
-
- <AddPurchaseWrap /> </>
+    <>
+    <PageTitle breadcrumbs={[]}>{'Add Sale'}</PageTitle>
+  <AddSaleswrap />
+  </>
   )
 }
 
-export default AddPurchase
+export default AddSales
