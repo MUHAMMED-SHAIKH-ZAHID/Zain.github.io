@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { PageTitle } from '../../../_metronic/layout/core';
@@ -9,22 +9,29 @@ interface Item {
     qty: number;
     price: number;
   }
-
-const AddInvoicewrap : React.FC = () => {
+  const AddInvoicewrap: React.FC = () => {
     const [items, setItems] = useState<Item[]>([
       { id: Date.now(), name: '', qty: 1, price: 0 },
     ]);
   
-    const handleInputChange = (index: number, field: keyof Item, value: string) => {
-      const newItems = [...items];
-      const item = newItems[index];
-      if (field === 'qty' || field === 'price') {
-        item[field] = parseFloat(value);
-      } else {
-        item[field] = value;
-      }
-      setItems(newItems);
+    const handleInputChange = (index: number, field: keyof Item, value: string | null) => {
+      setItems(items => items.map((item, idx) => {
+        if (idx !== index) return item;
+    
+        const newItem = { ...item };
+        
+        if (field === 'qty' || field === 'price') {
+          // Ensuring we're dealing with a string and defaulting to "0" if null
+          const numericValue = value === null ? "0" : value;
+          newItem[field] = parseFloat(numericValue);
+        } else {
+          newItem[field] = value || ""
+        }
+    
+        return newItem;
+      }));
     };
+    
   
     const handleRemoveItem = (index: number) => {
       const newItems = items.filter((_, i) => i !== index);
