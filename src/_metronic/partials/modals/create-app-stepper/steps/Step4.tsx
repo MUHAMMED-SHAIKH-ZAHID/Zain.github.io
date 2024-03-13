@@ -1,108 +1,50 @@
+import { CustomerFormProps } from '../IAppModels';
 
-import {StepProps} from '../IAppModels'
+const Step4 = ({ data, updateData }: CustomerFormProps) => {
+  // Destructure for easier access
+  const { company } = data;
 
-const Step4 = ({data, updateData}: StepProps) => {
   return (
-    <>
-      {/*begin::Step 4 */}
-      <div className='pb-5' data-kt-stepper-element='content'>
-        <div className='w-100'>
-          {/*begin::Form Group */}
-          <div className='fv-row'>
-            <label className='fs-6 fw-bolder text-gray-900 mb-7d-flex align-items-center fs-5 fw-semibold mb-4'>
-              <span className='required'>Select Storage</span>
-            </label>
+    <div className='pb-5' data-kt-stepper-element='content'>
+      <div className='w-100'>
+        {/* Company Name */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Company Name</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter company name'
+            value={company.companyName}
+            onChange={(e) => updateData({ ...data, company: { ...company, companyName: e.target.value } })}
+          />
+        </div>
 
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-primary'>
-                    <i className='fab fa-linux text-primary fs-2x'></i>
-                  </span>
-                </span>
+        {/* Route */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Route</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter route (optional)'
+            value={company.route || ''}
+            onChange={(e) => updateData({ ...data, company: { ...company, route: e.target.value } })}
+          />
+        </div>
 
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>Basic Server</span>
-                  <span className='fs-7 text-muted'>Linux based server storage</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='appStorage'
-                  value='Basic Server'
-                  checked={data.appStorage === 'Basic Server'}
-                  onChange={() => updateData({appStorage: 'Basic Server'})}
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-warning'>
-                    <i className='fab fa-aws text-warning fs-2x'></i>
-                  </span>
-                </span>
-
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>AWS</span>
-                  <span className='fs-7 text-muted'>Amazon Web Services</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='appStorage'
-                  value='AWS'
-                  checked={data.appStorage === 'AWS'}
-                  onChange={() => updateData({appStorage: 'AWS'})}
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-success  '>
-                    <i className='fab fa-google text-success fs-2x'></i>
-                  </span>
-                </span>
-
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>Google</span>
-                  <span className='fs-7 text-muted'>Google Cloud Storage</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='appStorage'
-                  value='Google'
-                  checked={data.appStorage === 'Google'}
-                  onChange={() => updateData({appStorage: 'Google'})}
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-          </div>
-          {/*end::Form Group */}
+        {/* Sales Person Assigned */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Sales Person Assigned</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter sales person name (optional)'
+            value={company.salesPersonAssigned || ''}
+            onChange={(e) => updateData({ ...data, company: { ...company, salesPersonAssigned: e.target.value } })}
+          />
         </div>
       </div>
-      {/*end::Step 4 */}
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export {Step4}
+export { Step4 };

@@ -1,10 +1,10 @@
-import { KTCard } from '../../../_metronic/helpers'
-import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
-import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
-import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
-import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
-import { productColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
-import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
+import { KTCard } from '../../../../_metronic/helpers'
+import { ListViewProvider, useListView } from '../../../modules/apps/user-management/users-list/core/ListViewProvider'
+import { QueryRequestProvider } from '../../../modules/apps/user-management/users-list/core/QueryRequestProvider'
+import { QueryResponseProvider } from '../../../modules/apps/user-management/users-list/core/QueryResponseProvider'
+import { UsersTable } from '../../../modules/apps/user-management/users-list/table/UsersTable'
+import { productColumns } from '../../../modules/apps/user-management/users-list/table/columns/_columns'
+import { UserEditModal } from '../../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
 
 
 

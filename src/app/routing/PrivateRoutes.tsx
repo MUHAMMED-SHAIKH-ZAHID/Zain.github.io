@@ -12,11 +12,11 @@ import Purchase from '../pages/purchase/Purchase'
 import Users from '../pages/users/Customer'
 import Reports from '../pages/reports/Reports'
 import { Account } from '../modules/profile/components/account/Account'
-import Products from '../pages/products/Products'
+import Products from '../pages/datamanage/products/Products'
 import Sales from '../pages/sales/Sales'
 import CreateSales from '../pages/sales/CreateSales'
-import AddSales from '../pages/sales/AddSales'
-import AddProducts from '../pages/products/AddProducts'
+import AddSales from '../pages/sales/AddSalesForm'
+import AddProducts from '../pages/datamanage/products/AddProducts'
 import AddPurchase from '../pages/purchase/AddPurchase'
 import Customer from '../pages/users/Customer'
 import RecentInvoice from '../pages/dashboard/RecentInvoice'
@@ -34,6 +34,13 @@ import SupplierProfile from '../pages/suplier/SupplierProfile'
 import SalesProfile from '../pages/sales/SellerTable'
 import CustomerProfile from '../pages/users/CustomerProfile'
 import SinglePurchaseDetails from '../pages/suplier/SinglePurchaseDetails'
+import AddCustomer from '../pages/users/AddCustomer'
+import AddSalesForm from '../pages/sales/AddSalesForm'
+import DataManage from '../pages/DataManage'
+import PurchaseQuotatioin from '../pages/purchase/PurchaseQuotatioin'
+import SalesOrder from '../pages/sales/SalesOrder'
+import AddQuotePurchase from '../pages/purchase/AddQuotePurchase'
+import AddQuoteSales from '../pages/sales/AddQuoteSales'
 
 
 const PrivateRoutes = () => {
@@ -62,12 +69,19 @@ const PrivateRoutes = () => {
         <Route path='/supplier/profile/spurchase' element={<SinglePurchaseDetails /> } />
 
   
-
+        {/* Purchase */}
         <Route path='/purchase' element={<Purchase />} />
-        <Route path='/products' element={<Products />} />
+        <Route path='/purchase/data' element={<Purchase />} />
+        <Route path='/purchase/addpurchase' element={<AddPurchase />} />
+        <Route path='/purchase/quotation' element={<PurchaseQuotatioin />} />
+        <Route path='/purchase/quotation/create' element={<AddQuotePurchase />} />
+
+
+        <Route path='/datamanage' element={<DataManage />} />
 
         {/* customer */}
         <Route path='/customer' element={<Customer />} />
+        <Route path='/customer/createuser' element={<AddCustomer />} />
         <Route path='/customer/profile' element={<CustomerProfile />} />
    
 
@@ -75,12 +89,15 @@ const PrivateRoutes = () => {
         <Route path='/reports' element={<Reports />} />
         {/* Sales */}
         <Route path='/sales' element={<Sales />} />
+        <Route path='/sales/data' element={<Sales />} />
+        <Route path='/sales/order' element={<SalesOrder />} />
+        <Route path='/sales/order/create' element={<AddQuoteSales/>} />
         <Route path='/sales/profile' element={<SalesProfile />} />
+        <Route path='/sales/createsales' element={<AddSalesForm />} />
      
 
-        <Route path='/createsales' element={<CreateSales />} />
-        <Route path='/addsales' element={<AddSales />} />
-        <Route path='/addpurchase' element={<AddPurchase />} />
+     
+  
 
         {/* Account */}
         <Route path='/account' element={<AccountTable />} />

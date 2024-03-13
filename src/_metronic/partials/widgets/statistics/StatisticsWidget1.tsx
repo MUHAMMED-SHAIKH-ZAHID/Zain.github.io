@@ -26,10 +26,7 @@ const StatisticsWidget1: React.FC<Props> = ({className, image, title, time, desc
 
         <div className='fw-bold text-primary my-6'>{time}</div>
 
-        <p
-          className='text-gray-900-75 fw-semibold fs-5 m-0'
-          dangerouslySetInnerHTML={{__html: description}}
-        ></p>
+     {description}
       </div>
       {/* end::Body */}
     </div>

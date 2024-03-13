@@ -25,20 +25,13 @@ function Details (){
                 
                 </div>
 
-                <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
-                  {/* <a
+                <div className='d-flex flex-wrap fw-bold fs-6 mt-4 pe-2'>
+                  <a
                     href='#'
                     className='d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2'
                   >
-                    <KTIcon iconName='profile-circle' className='fs-4 me-1' />
-                    Developer
-                  </a> */}
-                  <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-500 text-hover-dark me-5 mb-2'
-                  >
-                    <KTIcon iconName='geolocation' className='fs-4 me-1 text-primary' />
-                   Kerala
+                    <KTIcon iconName='phone' className='fs-4 me-1 text-dark' />
+                    +91 23485 93887
                   </a>
                   <a
                     href='#'
@@ -46,6 +39,22 @@ function Details (){
                   >
                     <KTIcon iconName='sms' className='fs-4 me-1 text-danger' />
                     suplier@gmail.com
+                  </a>
+                  </div>
+                  <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
+                  <a
+                    href='#'
+                    className='d-flex align-items-center text-gray-500 text-hover-dark me-5 mb-2'
+                  >
+                    <KTIcon iconName='office-bag' className='fs-4 me-1 text-warning' />
+                   Company Name
+                  </a>
+                  <a
+                    href='#'
+                    className='d-flex align-items-center text-gray-500 text-hover-dark me-5 mb-2'
+                  >
+                    <KTIcon iconName='geolocation' className='fs-4 me-1 text-primary' />
+                   Kerala
                   </a>
                 </div>
               </div>
@@ -83,14 +92,14 @@ function Details (){
                     <div className='fw-bold fs-6 text-gray-500'>Total Amount</div>
                   </div>
 
-                  {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                      <KTIcon iconName='arrow-up' className='fs-3 text-success me-2' />
-                      <div className='fs-2 fw-bolder'>60%</div>
+                      <KTIcon iconName='arrow-down' className='fs-3 text-danger me-2' />
+                      <div className='fs-2 fw-bolder'>600</div>
                     </div>
 
-                    <div className='fw-bold fs-6 text-gray-500'>Success Rate</div>
-                  </div> */}
+                    <div className='fw-bold fs-6 text-gray-500'>Credit Amount</div>
+                  </div>
                 </div>
               </div>
 

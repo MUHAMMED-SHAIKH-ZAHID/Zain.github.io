@@ -3,7 +3,7 @@
 import {useRef, useState} from 'react'
 import {createPortal} from 'react-dom'
 import {Modal} from 'react-bootstrap'
-import {defaultCreateAppData, ICreateAppData} from './IAppModels'
+import {defaultCreateCustomerData, ICreateCustomerData} from './IAppModels'
 import {StepperComponent} from '../../../assets/ts/components'
 import {KTIcon} from '../../../helpers'
 import {Step1} from './steps/Step1'
@@ -11,6 +11,7 @@ import {Step2} from './steps/Step2'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
+import { Link } from 'react-router-dom'
 
 type Props = {
   show: boolean
@@ -19,30 +20,39 @@ type Props = {
 
 const modalsRoot = document.getElementById('root-modals') || document.body
 
-const CreateAppModal = ({show, handleClose}: Props) => {
+const CreateAppModal = ({show, handleClose }: Props) => {
+  
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const [ stepper, setStepper ] = useState<StepperComponent | null>(null)
-  const [data, setData] = useState<ICreateAppData>(defaultCreateAppData)
+  const [data, setData] = useState<ICreateCustomerData>(defaultCreateCustomerData)
   const [hasError, setHasError] = useState(false)
 
   const loadStepper = () => {
     setStepper(StepperComponent.createInsance(stepperRef.current as HTMLDivElement))
   }
 
-  const updateData = (fieldsToUpdate: Partial<ICreateAppData>) => {
+  const updateData = (fieldsToUpdate: Partial<ICreateCustomerData>) => {
     const updatedData = {...data, ...fieldsToUpdate}
     setData(updatedData)
   }
 
   const checkAppBasic = (): boolean => {
-    if (!data.appBasic.appName || !data.appBasic.appType) {
+    if (!data.basicInfo.fullName ) {
       return false
     }
     return true
   }
 
-  const checkAppDataBase = (): boolean => {
-    if (!data.appDatabase.databaseName || !data.appDatabase.databaseSolution) {
+  const checkContactData = (): boolean => {
+    if (!data.contact.email || !data.contact.mobile ) {
+      return false
+    }
+
+    return true
+  }
+
+  const CheckLocationData = (): boolean => {
+    if (!data.location.address || !data.location.state ) {
       return false
     }
 
@@ -69,9 +79,15 @@ const CreateAppModal = ({show, handleClose}: Props) => {
         return
       }
     }
+    if (stepper.getCurrentStepIndex() === 2) {
+      if (!checkContactData()) {
+        setHasError(true)
+        return
+      }
+    }
 
     if (stepper.getCurrentStepIndex() === 3) {
-      if (!checkAppDataBase()) {
+      if (!CheckLocationData()) {
         setHasError(true)
         return
       }
@@ -80,8 +96,10 @@ const CreateAppModal = ({show, handleClose}: Props) => {
     stepper.goNext()
   }
 
-  const submit = () => {
-    window.location.reload()
+  const submit = ({e}:any) => {
+    e.preventDefault()
+    console.log(data,"dddddddddd");
+    handleClose();
   }
 
   return createPortal(
@@ -96,9 +114,9 @@ const CreateAppModal = ({show, handleClose}: Props) => {
       backdrop={true}
     >
       <div className='modal-header'>
-        <h2>Create App</h2>
+        <h2>Create User</h2>
         {/* begin::Close */}
-        <div className='btn btn-sm btn-icon btn-active-color-primary' onClick={handleClose}>
+        <div className='btn btn-sm btn-icon btn-active-color-primary' onClick={(handleClose)}>
           <KTIcon className='fs-1' iconName='cross' />
         </div>
         {/* end::Close */}
@@ -128,9 +146,9 @@ const CreateAppModal = ({show, handleClose}: Props) => {
 
                   {/* begin::Label*/}
                   <div className='stepper-label'>
-                    <h3 className='stepper-title'>Details</h3>
+                    <h3 className='stepper-title'>Basic information</h3>
 
-                    <div className='stepper-desc'>Name your App</div>
+                    <div className='stepper-desc'>Name of customer</div>
                   </div>
                   {/* end::Label*/}
                 </div>
@@ -155,9 +173,9 @@ const CreateAppModal = ({show, handleClose}: Props) => {
 
                   {/* begin::Label*/}
                   <div className='stepper-label'>
-                    <h3 className='stepper-title'>Frameworks</h3>
+                    <h3 className='stepper-title'>Contact Details</h3>
 
-                    <div className='stepper-desc'>Define your app framework</div>
+                    <div className='stepper-desc'>fill Email and Mobile</div>
                   </div>
                   {/* begin::Label*/}
                 </div>
@@ -182,9 +200,9 @@ const CreateAppModal = ({show, handleClose}: Props) => {
 
                   {/* begin::Label*/}
                   <div className='stepper-label'>
-                    <h3 className='stepper-title'>Database</h3>
+                    <h3 className='stepper-title'>Location</h3>
 
-                    <div className='stepper-desc'>Select the app database type</div>
+                    <div className='stepper-desc'>fill the location information</div>
                   </div>
                   {/* end::Label*/}
                 </div>
@@ -209,7 +227,7 @@ const CreateAppModal = ({show, handleClose}: Props) => {
 
                   {/* begin::Label*/}
                   <div className='stepper-label'>
-                    <h3 className='stepper-title'>Storage</h3>
+                    <h3 className='stepper-title'>Company Information</h3>
 
                     <div className='stepper-desc'>Provide storage details</div>
                   </div>
@@ -258,7 +276,7 @@ const CreateAppModal = ({show, handleClose}: Props) => {
               <Step2 data={data} updateData={updateData} hasError={hasError} />
               <Step3 data={data} updateData={updateData} hasError={hasError} />
               <Step4 data={data} updateData={updateData} hasError={hasError} />
-              <Step5 />
+              <Step5 data={data} updateData={updateData} hasError={hasError} />
 
               {/*begin::Actions */}
               <div className='d-flex flex-stack pt-10'>
@@ -274,7 +292,7 @@ const CreateAppModal = ({show, handleClose}: Props) => {
                 </div>
                 <div>
                   <button
-                    type='button'
+                    type='submit'
                     className='btn btn-lg btn-primary'
                     data-kt-stepper-action='submit'
                     onClick={submit}

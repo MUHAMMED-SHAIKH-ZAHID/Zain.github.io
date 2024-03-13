@@ -1,164 +1,102 @@
+import { CustomerFormProps } from '../IAppModels';
 
-import {StepProps} from '../IAppModels'
+const Step3 = ({ data, updateData,hasError }: CustomerFormProps) => {
+  // Destructuring for easier access
+  const { location } = data;
 
-const Step3 = ({data, updateData, hasError}: StepProps) => {
   return (
-    <>
-      {/*begin::Step 3 */}
-      <div className='pb-5' data-kt-stepper-element='content'>
-        <div className='w-100'>
-          {/*begin::Form Group */}
+    <div className='pb-5' data-kt-stepper-element='content'>
+      <div className='w-100'>
+        {/* Address */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Address</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter address'
+            value={location.address}
+            onChange={(e) => updateData({ ...data, location: { ...location, address: e.target.value } })}
+          />
+           {hasError && !location.address && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>Address is required</div>
+            </div>
+          )}
+        </div>
 
-          <div className='fv-row mb-10'>
-            <label className='required fs-5 fw-semibold mb-2'>Database Name</label>
+        {/* Address 2 */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Address 2 (Optional)</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter location address (optional)'
+            value={location.address2 || ''}
+            onChange={(e) => updateData({ ...data, location: { ...location, address2: e.target.value } })}
+          />
+        </div>
 
-            <input
-              type='text'
-              className='form-control form-control-lg form-control-solid'
-              name='dbname'
-              value={data.appDatabase.databaseName}
-              onChange={(e) =>
-                updateData({
-                  appDatabase: {
-                    databaseName: e.target.value,
-                    databaseSolution: data.appDatabase.databaseSolution,
-                  },
-                })
-              }
-            />
-            {!data.appDatabase.databaseName && hasError && (
-              <div className='fv-plugins-message-container'>
-                <div data-field='appname' data-validator='notEmpty' className='fv-help-block'>
-                  Database name is required
-                </div>
-              </div>
-            )}
-          </div>
-          {/*end::Form Group */}
+        {/* State Dropdown */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>State</label>
+          <select
+            className='form-select'
+            value={location.state}
+            onChange={(e) => updateData({ ...data, location: { ...location, state: e.target.value } })}
+          >
+            <option value=''>Select a State</option>
+            <option value='AP'>Andhra Pradesh</option>
+  <option value='AR'>Arunachal Pradesh</option>
+  <option value='AS'>Assam</option>
+  <option value='BR'>Bihar</option>
+  <option value='CT'>Chhattisgarh</option>
+  <option value='GA'>Goa</option>
+  <option value='GJ'>Gujarat</option>
+  <option value='HR'>Haryana</option>
+  <option value='HP'>Himachal Pradesh</option>
+  <option value='JK'>Jammu and Kashmir</option>
+  <option value='JH'>Jharkhand</option>
+  <option value='KA'>Karnataka</option>
+  <option value='KL'>Kerala</option>
+  <option value='MP'>Madhya Pradesh</option>
+  <option value='MH'>Maharashtra</option>
+  <option value='MN'>Manipur</option>
+  <option value='ML'>Meghalaya</option>
+  <option value='MZ'>Mizoram</option>
+  <option value='NL'>Nagaland</option>
+  <option value='OD'>Odisha</option>
+  <option value='PB'>Punjab</option>
+  <option value='RJ'>Rajasthan</option>
+  <option value='SK'>Sikkim</option>
+  <option value='TN'>Tamil Nadu</option>
+  <option value='TG'>Telangana</option>
+  <option value='TR'>Tripura</option>
+  <option value='UP'>Uttar Pradesh</option>
+  <option value='UT'>Uttarakhand</option>
+  <option value='WB'>West Bengal</option>
+            {/* Add more states as needed */}
+          </select>
+          {hasError && !location.state && (
+            <div className='fv-plugins-message-container'>
+              <div className='fv-help-block'>State is required</div>
+            </div>
+          )}
+        </div>
 
-          {/*begin::Form Group */}
-          <div className='fv-row'>
-            <label className='d-flex align-items-center fs-5 fw-semibold mb-4'>
-              <span className='required'>Select Database Engine</span>
-
-              <i
-                className='fas fa-exclamation-circle ms-2 fs-7'
-                data-bs-toggle='tooltip'
-                title='Select your app database engine'
-              ></i>
-            </label>
-
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-success'>
-                    <i className='fas fa-database text-success fs-2x'></i>
-                  </span>
-                </span>
-
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>MySQL</span>
-                  <span className='fs-7 text-muted'>Basic MySQL database</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='databaseSolution'
-                  value='MySQL'
-                  checked={data.appDatabase.databaseSolution === 'MySQL'}
-                  onChange={() =>
-                    updateData({
-                      appDatabase: {
-                        databaseName: data.appDatabase.databaseName,
-                        databaseSolution: 'MySQL',
-                      },
-                    })
-                  }
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-danger'>
-                    <i className='fab fa-google text-danger fs-2x'></i>
-                  </span>
-                </span>
-
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>Firebase</span>
-                  <span className='fs-7 text-muted'>Google based app data management</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='databaseSolution'
-                  value='Firebase'
-                  checked={data.appDatabase.databaseSolution === 'Firebase'}
-                  onChange={() =>
-                    updateData({
-                      appDatabase: {
-                        databaseName: data.appDatabase.databaseName,
-                        databaseSolution: 'Firebase',
-                      },
-                    })
-                  }
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-
-            {/*begin:Option */}
-            <label className='d-flex align-items-center justify-content-between cursor-pointer mb-6'>
-              <span className='d-flex align-items-center me-2'>
-                <span className='symbol symbol-50px me-6'>
-                  <span className='symbol-label bg-light-warning'>
-                    <i className='fab fa-amazon text-warning fs-2x'></i>
-                  </span>
-                </span>
-
-                <span className='d-flex flex-column'>
-                  <span className='fw-bolder fs-6'>DynamoDB</span>
-                  <span className='fs-7 text-muted'>Amazon Fast NoSQL Database</span>
-                </span>
-              </span>
-
-              <span className='form-check form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input'
-                  type='radio'
-                  name='databaseSolution'
-                  value='DynamoDB'
-                  checked={data.appDatabase.databaseSolution === 'DynamoDB'}
-                  onChange={() =>
-                    updateData({
-                      appDatabase: {
-                        databaseName: data.appDatabase.databaseName,
-                        databaseSolution: 'DynamoDB',
-                      },
-                    })
-                  }
-                />
-              </span>
-            </label>
-            {/*end::Option */}
-          </div>
-          {/*end::Form Group */}
+        {/* Google Map URL */}
+        <div className='fv-row mb-10'>
+          <label className='form-label fw-bold'>Google Map URL (Optional)</label>
+          <input
+            type='text'
+            className='form-control'
+            placeholder='Enter Google Map URL (optional)'
+            value={location.gmap || ''}
+            onChange={(e) => updateData({ ...data, location: { ...location, gmap: e.target.value } })}
+          />
         </div>
       </div>
-      {/*end::Step 3 */}
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export {Step3}
+export { Step3 };

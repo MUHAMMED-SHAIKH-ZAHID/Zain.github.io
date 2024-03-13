@@ -412,7 +412,7 @@ const icons: IIcons = {
   'save-deposit': 4,
   xmr: 2,
   'financial-schedule': 4,
-  'office-bag': 4,
+  '-bofficeag': 4,
   'night-day': 10,
   sun: 9,
   drop: 2,

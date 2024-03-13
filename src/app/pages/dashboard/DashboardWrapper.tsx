@@ -21,6 +21,7 @@ import {
   ChartsWidget2,
 } from '../../../_metronic/partials/widgets'
 import RecentInvoice from './RecentInvoice'
+import { MenuInner } from '../../../_metronic/layout/components/header/header-menus'
 
 const DashboardPage: FC = () => (
   <>
@@ -113,6 +114,7 @@ const DashboardPage: FC = () => (
       <div className="my-2 mt-5 fs-3 fw-bold">Invoice</div>
      <RecentInvoice />
       </div>
+     
   </>
 )
 
@@ -120,6 +122,7 @@ const DashboardWrapper: FC = () => {
   const intl = useIntl()
   return (
     <>
+    <MenuInner Title={'Dashboard'} ></MenuInner>
       <PageTitle breadcrumbs={[]}>Dashboard</PageTitle>
       <DashboardPage />
     </>

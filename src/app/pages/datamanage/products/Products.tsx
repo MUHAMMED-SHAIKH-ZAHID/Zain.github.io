@@ -1,12 +1,12 @@
 import { ProductListWrapper } from './ProductListWrapper'
-import { PageTitle } from '../../../_metronic/layout/core'
+import { PageTitle } from '../../../../_metronic/layout/core'
 
 
 const Products = () => {
 
     return (
     <div>
-         <PageTitle breadcrumbs={[]}>{'Products'}</PageTitle>
+         {/* <PageTitle breadcrumbs={[]}>{'Products'}</PageTitle> */}
         <ProductListWrapper />
     </div>
   )

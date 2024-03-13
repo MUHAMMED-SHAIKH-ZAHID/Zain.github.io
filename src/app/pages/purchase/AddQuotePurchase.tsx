@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { PageTitle } from '../../../_metronic/layout/core';
 import { KTIcon } from '../../../_metronic/helpers';
-import { Modal,Button ,Form } from 'react-bootstrap';
 
 interface Item {
     id: number;
@@ -12,14 +11,10 @@ interface Item {
     price: number;
   }
 
-const AddPurchaseWrap : React.FC = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
-  
-  const [items, setItems] = useState<Item[]>([
-    { id: Date.now(), name: '', qty: 1, price: 0, discount: 0, tax: 0 },
-  ]);
+const AddQuotePurchaseWrap : React.FC = () => {
+    const [items, setItems] = useState<Item[]>([
+      { id: Date.now(), name: '', qty: 1, price: 0 },
+    ]);
   
     const handleInputChange = (index: number, field: keyof Item, value: string) => {
       const newItems = [...items];
@@ -38,7 +33,7 @@ const handleShow = () => setShow(true);
     };
   
     const handleAddItem = () => {
-      setItems([...items, { id: Date.now(), name: '', qty: 1, price: 0, discount: 0, tax: 0 }]);
+      setItems([...items, { id: Date.now(), name: '', qty: 1, price: 0 }]);
     };
   
   const [invoiceDate, setInvoiceDate] = useState<Date | null>(new Date());
@@ -65,27 +60,6 @@ const handleShow = () => setShow(true);
     // Add more categories as needed
   ];
 
-
-    const [productName, setProductName] = useState('');
-    const [category, setCategory] = useState('');
-    const [brand, setBrand] = useState('');
-    const [mrp, setMrp] = useState('');
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      const productDetails = {
-        productName,
-        category,
-        brand,
-        mrp
-      };
-      console.log(productDetails);
-      // Handle product details submission here (e.g., send to API)
-      handleClose(); // Close modal after submission
-    };
-    
-  
-
   return (
     <div className=" card p-5">
         <div className='d-flex flex-column align-items-start flex-xxl-row '>
@@ -101,7 +75,7 @@ const handleShow = () => setShow(true);
 
       {/* Invoice Number */}
       <div className="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4" title="Enter invoice number">
-        <span className="fs-2x fw-bold text-gray-800 me-2">Purchase Form</span>
+        <span className="fs-2x fw-bold text-gray-800 me-2">Purchase Quotation</span>
         {/* <input 
           type="text" 
           className="form-control form-control-flush fw-bold text-muted fs-3 w-125px" 
@@ -112,7 +86,7 @@ const handleShow = () => setShow(true);
 
       {/* Due Date */}
       <div className="d-flex align-items-center justify-content-end flex-equal order-3 fw-row" title="Specify invoice due date">
-        <div className="fs-6 fw-bold text-gray-700 text-nowrap me-2">Quotation Id:</div>
+        <div className="fs-6 fw-bold text-gray-700 text-nowrap me-2">Purchase Id:</div>
         <input 
           type="text" 
           className="form-control form-control-flush fw-bold text-muted fs-3 w-125px" 
@@ -142,8 +116,19 @@ const handleShow = () => setShow(true);
             ))}
           </select>
         </div>
-      
-       
+        <div className="col-lg-4">
+          <label htmlFor="categories" className="form-label">Categories</label>
+          <select className="form-select" id="categories">
+            <option selected>Choose...</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.name}>{category.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="col-lg-4">
+        <label htmlFor="brand" className="form-label">Brand</label>
+          <input type="text" className="form-control" id="brand" />
+          </div>
 
         </div>
 </div>
@@ -153,27 +138,32 @@ const handleShow = () => setShow(true);
       <table className="table ">
         <thead>
           <tr className='border-bottom-2'>
-            <th scope='col'>Ean Code</th>
-            <th scope="col">Add Manualy</th>
+            <th scope="col">Product Name </th>
             <th scope="col">Qty</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
             <th scope="col">Tax</th>
             <th scope="col">Total</th>
-            <th scope="col">Status</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           {items.map((item, index) => (
             <tr key={item.id} className='py-10'>
-      <td><input type="number" className="form-control" placeholder="Ean" value={item.qty} onChange={(e) => handleInputChange(index, 'qty', e.target.value)} /></td>
-<td>      <Button className='btn btn-md fs-7' variant="primary" onClick={handleShow}>
-        Add 
-      </Button>
+<td>
+  <select 
+    className="form-control" 
+    value={item.name} 
+    onChange={(e) => handleInputChange(index, 'name', e.target.value)}
+  >
+    <option value="">Select </option>
+    <option value="Product 1">Product 1</option>
+    <option value="Product 2">Product 2</option>
+    <option value="Product 3">Product 3</option>
+    <option value="Product 4">Product 4</option>
+    <option value="Product 5">Product 5</option>
+  </select>
 </td>
-
-
                 <td><input type="number" className="form-control" placeholder="Qty" value={item.qty} onChange={(e) => handleInputChange(index, 'qty', e.target.value)} /></td>
                 <td><input type="number" className="form-control" placeholder="Price" value={item.price} onChange={(e) => handleInputChange(index, 'price', e.target.value)} /></td>
                 <td><input type="number" className="form-control" placeholder="Discount" value={item.discount} onChange={(e) => handleInputChange(index, 'discount', e.target.value)} /></td>
@@ -184,18 +174,6 @@ const handleShow = () => setShow(true);
     ((Number(item.qty) * Number(item.price)) * (Number(item.discount) / 100)) + 
     ((Number(item.qty) * Number(item.price)) * (Number(item.tax) / 100))
   ).toFixed(2)} 
-</td>
-<td>
-  <select 
-    className="form-control" 
-    value={item.name} 
-    onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-  >
-    <option value="">Select </option>
-    <option value="Product 1">Paid</option>
-    <option value="Product 2">Unppaid</option>
-    <option value="Product 3">Partial</option>
-  </select>
 </td>
 <td><button type="button" className="btn btn-sm btn-danger" onClick={() => handleRemoveItem(index)}>  <span className='fs-8'>delete</span></button></td>
             </tr>
@@ -234,75 +212,12 @@ const handleShow = () => setShow(true);
   </div>
 
 
-  <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Product</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Body>
-          <Form.Group className="mb-3">
-  <Form.Label>Product Name</Form.Label>
-  <Form.Select 
-    value={productName} 
-    onChange={(e) => setProductName(e.target.value)} 
-    required
-  >
-    <option value="">Select Product</option>
-    <option value="Product 1">Product 1</option>
-    <option value="Product 2">Product 2</option>
-    <option value="Product 3">Product 3</option>
-    <option value="Product 4">Product 4</option>
-    <option value="Product 5">Product 5</option>
-  </Form.Select>
-</Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Brand</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>MRP</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter MRP"
-                value={mrp}
-                onChange={(e) => setMrp(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
   {/* Send Invoice Button */}
   <div className="d-flex justify-content-center mt-5">
     <button className="btn btn-dark" type="button">Create Sale</button>
   </div>
 </div>
-
 
     </div>
     </div>
@@ -317,13 +232,13 @@ const handleShow = () => setShow(true);
 
 
 
-const AddPurchase = () => {
+const AddQuotePurchase = () => {
   return (
  <>
        <PageTitle breadcrumbs={[]}>{'Add Purchase'}</PageTitle>
 
- <AddPurchaseWrap /> </>
+ <AddQuotePurchaseWrap /> </>
   )
 }
 
-export default AddPurchase
+export default AddQuotePurchase

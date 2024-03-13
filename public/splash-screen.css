@@ -57,3 +57,21 @@ html[data-bs-theme='dark'] .splash-screen .light-logo {
 html[data-bs-theme='dark'] .splash-screen .dark-logo {
   display: block;
 }
+
+/* Customizes the scrollbar's thumb (the part that you drag) */
+::-webkit-scrollbar-thumb {
+  background: black; /* or any color you want */
+  border-radius: 5px; /* Optional: adds rounded corners to the scrollbar thumb */
+}
+
+/* Customizes the scrollbar track (the background of the scrollbar) */
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Light grey background */
+  border-radius: 5px; /* Optional: adds rounded corners to the scrollbar track */
+}
+
+/* Customizes the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 5px; /* or the size you want */
+}
+

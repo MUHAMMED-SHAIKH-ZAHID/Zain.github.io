@@ -47,12 +47,26 @@ export type ExpenceList = {
 
 
 export type Purchase = {
-  id?: ID
-  purchaseID?: string
-  generatedDate?: string
-  suppliername?: string
-  purchasestatus?:string
+  id:string
+  supliername:string
+  invoice?:string
+  purchasePrice?:string
+  status?:string
+  orderStatus: 'Pending' | 'In Progress' | 'Completed' | 'Cancelled';
+  actions?: string;
 }
+
+export type sales = {
+  orderID: string;
+  invoice: string;
+  generatedDate: string; // Assuming the date is stored as a string
+  dealername: string;
+  quantity: number;
+  totalamount: number;
+  totalinclgst: number;
+}
+
+
 export type Products = {
   name: string;
   sku: string;
@@ -76,3 +90,12 @@ export const initialUser: User = {
   name: '',
   email: '',
 }
+
+export type Invoice = {
+  slNo: string | number; 
+  invoiceNumber: string;
+  amount: number | string; 
+  invoiceDate: string;
+  dueDate: string;
+  status: 'Pending' | 'In Progress' | 'Paid' | 'Overdue'; 
+};

@@ -1,11 +1,10 @@
 
 import { KTCard } from '../../../_metronic/helpers'
-import { UsersListHeader } from '../../modules/apps/user-management/users-list/components/header/UsersListHeader'
 import { ListViewProvider, useListView } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
 import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
 import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
 import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
-import { productsColumns, suplierColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import { PurchaseColumns} from '../../modules/apps/user-management/users-list/table/columns/_columns'
 import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
 
 
@@ -13,34 +12,36 @@ import { UserEditModal } from '../../modules/apps/user-management/users-list/use
 const ProductList = () => {
   const {itemIdForUpdate} = useListView()
   const Data = [
-    { id: '1', supliername: 'Supplier A', purchasePrice: '100', category: 'Electronics', Quantity: '50' },
-    { id: '2', supliername: 'Supplier B', purchasePrice: '150', category: 'Clothing', Quantity: '70' },
-    { id: '3', supliername: 'Supplier C', purchasePrice: '200', category: 'Groceries', Quantity: '30' },
-    { id: '4', supliername: 'Supplier D', purchasePrice: '250', category: 'Electronics', Quantity: '40' },
-    { id: '5', supliername: 'Supplier E', purchasePrice: '300', category: 'Toys', Quantity: '90' },
-    { id: '6', supliername: 'Supplier F', purchasePrice: '350', category: 'Books', Quantity: '120' },
-    { id: '7', supliername: 'Supplier G', purchasePrice: '400', category: 'Clothing', Quantity: '60' },
-    { id: '8', supliername: 'Supplier H', purchasePrice: '450', category: 'Electronics', Quantity: '80' },
-    { id: '9', supliername: 'Supplier I', purchasePrice: '500', category: 'Groceries', Quantity: '20' },
-    { id: '10', supliername: 'Supplier J', purchasePrice: '550', category: 'Toys', Quantity: '110' },
-    { id: '11', supliername: 'Supplier K', purchasePrice: '600', category: 'Books', Quantity: '130' },
-    { id: '12', supliername: 'Supplier L', purchasePrice: '650', category: 'Clothing', Quantity: '55' },
-    { id: '13', supliername: 'Supplier M', purchasePrice: '700', category: 'Electronics', Quantity: '45' },
-    { id: '14', supliername: 'Supplier N', purchasePrice: '750', category: 'Groceries', Quantity: '35' },
-    { id: '15', supliername: 'Supplier O', purchasePrice: '800', category: 'Toys', Quantity: '95' },
-    { id: '16', supliername: 'Supplier P', purchasePrice: '850', category: 'Books', Quantity: '125' },
-    { id: '17', supliername: 'Supplier Q', purchasePrice: '900', category: 'Clothing', Quantity: '65' },
-    { id: '18', supliername: 'Supplier R', purchasePrice: '950', category: 'Electronics', Quantity: '85' },
-    { id: '19', supliername: 'Supplier S', purchasePrice: '1000', category: 'Groceries', Quantity: '25' },
-    { id: '20', supliername: 'Supplier T', purchasePrice: '1050', category: 'Toys', Quantity: '115' },
+    { id: 1, supliername: 'Mander LLC', invoice: 'INVONb65/9026/2021', purchasePrice: 74823, status: 'Transit' },
+    { id: 2, supliername: 'Sami LLC', invoice: 'INVAQS15/1710/2020', purchasePrice: 2782, status: 'Hold' },
+    { id: 3, supliername: 'Srinivas-Samra', invoice: 'INVdYB14/0789/2022', purchasePrice: 38727, status: 'Transit' },
+    { id: 4, supliername: 'Jha Inc', invoice: 'INVOVS51/0547/2023', purchasePrice: 91365, status: 'Partial Transit' },
+    { id: 5, supliername: 'Dyal-Shan', invoice: 'INVNQj69/3670/2021', purchasePrice: 70293, status: 'Transit' },
+    { id: 6, supliername: 'Ramanathan-Sama', invoice: 'INVuvE93/6554/2021', purchasePrice: 73353, status: 'Transit' },
+    { id: 7, supliername: 'Doctor-Kalita', invoice: 'INVVlf33/0947/2023', purchasePrice: 26414, status: 'Partial Transit' },
+    { id: 8, supliername: 'Ravi, Badami and Tailor', invoice: 'INVFdJ49/5545/2020', purchasePrice: 33744, status: 'Hold' },
+    { id: 9, supliername: 'Bhakta Inc', invoice: 'INVKNV69/6544/2022', purchasePrice: 49021, status: 'Placed' },
+    { id: 10, supliername: 'Biswas Group', invoice: 'INVnhX42/6493/2020', purchasePrice: 29091, status: 'Hold' },
+    { id: 11, supliername: 'Madan-Ganesh', invoice: 'INVwDw22/5249/2023', purchasePrice: 50577, status: 'Partial Transit' },
+    { id: 12, supliername: 'Saran, Sanghvi and Char', invoice: 'INVAdR20/6996/2021', purchasePrice: 68614, status: 'Placed' },
+    { id: 13, supliername: 'Singhal Ltd', invoice: 'INVfNK93/3355/2021', purchasePrice: 21459, status: 'Placed' },
+    { id: 14, supliername: 'Dalal-Comar', invoice: 'INVTIP70/0959/2021', purchasePrice: 50832, status: 'Transit' },
+    { id: 15, supliername: 'Kala Ltd', invoice: 'INVmDZ58/8945/2022', purchasePrice: 84012, status: 'Transit' },
+    { id: 16, supliername: 'Sarraf-Handa', invoice: 'INVHiw65/9351/2022', purchasePrice: 74802, status: 'Hold' },
+    { id: 17, supliername: 'Rajagopalan and Sons', invoice: 'INVhQD52/1191/2020', purchasePrice: 8572, status: 'Placed' },
+    { id: 18, supliername: 'Choudhury PLC', invoice: 'INVlXM87/1728/2022', purchasePrice: 18175, status: 'Partial Transit' },
+    { id: 19, supliername: 'Khatri-Garde', invoice: 'INVUQC67/1217/2021', purchasePrice: 95177, status: 'Partial Transit' },
+    { id: 20, supliername: 'Hari-Seshadri', invoice: 'INVJRI21/2721/2020', purchasePrice: 89348, status: 'Partial Transit' }
   ];
+  
+  
   
 
   
   return (
     <>
       <KTCard>
-        <UsersTable column={productsColumns} Data={Data} Title={'Purchase'}/>
+        <UsersTable column={PurchaseColumns} Data={Data} Title={'Purchase'}/>
       </KTCard>
       {itemIdForUpdate !== undefined && <UserEditModal />}
     </>

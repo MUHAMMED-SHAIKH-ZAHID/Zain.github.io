@@ -119,8 +119,14 @@ const SuplierList = () => {
       actions: 'Placeholder Action', // Added action
     },
   ];
+  interface RowData {
+    orderID:string,
+    suppliername:string,
+    orderStatus:string,
+    actions:string
+  }
   
-  const actionClickHandler = (rowData) => {
+  const actionClickHandler = (rowData :RowData) => {
     console.log("Button clicked for row:", rowData);  };
 
   const columns = salesColumns(actionClickHandler);

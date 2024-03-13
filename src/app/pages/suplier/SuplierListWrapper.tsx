@@ -13,28 +13,29 @@ import { UserEditModal } from '../../modules/apps/user-management/users-list/use
 const SuplierList = () => {
   const {itemIdForUpdate} = useListView()
 
-const Data = [
-    { name: "John Doe", email: "john.doe@example.com", location: "New York, NY", company: "Tech Innovations Inc." },
-    { name: "Jane Smith", email: "jane.smith@example.com", location: "San Francisco, CA", company: "Creative Solutions LLC" },
-    { name: "William Johnson", email: "william.johnson@example.com", location: "Chicago, IL", company: "Global Enterprises" },
-    { name: "Emma Wilson", email: "emma.wilson@example.com", location: "Austin, TX", company: "DesignWorks Studio" },
-    { name: "Michael Brown", email: "michael.brown@example.com", location: "Seattle, WA", company: "CloudNet Solutions" },
-    { name: "Olivia Martinez", email: "olivia.martinez@example.com", location: "Denver, CO", company: "NextGen Advisors" },
-    { name: "Lucas White", email: "lucas.white@example.com", location: "Boston, MA", company: "EcoTech" },
-    { name: "Sophia Taylor", email: "sophia.taylor@example.com", location: "Los Angeles, CA", company: "Innovatech" },
-    { name: "Mason Thomas", email: "mason.thomas@example.com", location: "Dallas, TX", company: "Tech Pioneers" },
-    { name: "Isabella Jackson", email: "isabella.jackson@example.com", location: "Philadelphia, PA", company: "Bright Future Solutions" },
-    { name: "Ethan Lee", email: "ethan.lee@example.com", location: "Miami, FL", company: "Blue Ocean Tech" },
-    { name: "Mia Harris", email: "mia.harris@example.com", location: "Atlanta, GA", company: "Digital Dreams" },
-    { name: "Alexander Clark", email: "alexander.clark@example.com", location: "Phoenix, AZ", company: "GreenWorld Innovations" },
-    { name: "Charlotte Walker", email: "charlotte.walker@example.com", location: "San Diego, CA", company: "Creative Minds Inc." },
-    { name: "James Wright", email: "james.wright@example.com", location: "Las Vegas, NV", company: "Visionary Apps" },
-    { name: "Ava King", email: "ava.king@example.com", location: "Portland, OR", company: "Sustainable Solutions" },
-    { name: "Benjamin Scott", email: "benjamin.scott@example.com", location: "Houston, TX", company: "NextWave Tech" },
-    { name: "Amelia Young", email: "amelia.young@example.com", location: "Minneapolis, MN", company: "Future Horizons" },
-    { name: "Logan Anderson", email: "logan.anderson@example.com", location: "New Orleans, LA", company: "Infinite Possibilities Ltd." },
-    { name: "Harper Roberts", email: "harper.roberts@example.com", location: "Kansas City, MO", company: "Dynamic Development" }
+  const Data = [
+    { name: 'Damini Barman', mobile: '4394377847', email: 'hazelgulati@gmail.com', company: 'Bains-Hayre', location: 'Nagaon' },
+    { name: 'Reyansh Brar', mobile: '01586438688', email: 'abram63@chad-hari.info', company: 'Ray-Banik', location: 'Jalandhar' },
+    { name: 'Indrans Rau', mobile: '05367007837', email: 'rheachoudhry@hotmail.com', company: 'Chakrabarti and Sons', location: 'Tiruvottiyur' },
+    { name: 'Biju Seshadri', mobile: '07523392876', email: 'gbajwa@gmail.com', company: 'Karpe Group', location: 'Ambala' },
+    { name: 'Sara Gara', mobile: '360907267', email: 'irarattan@yahoo.com', company: 'Lall Ltd', location: 'Chennai' },
+    { name: 'Jhanvi Bhalla', mobile: '02851144081', email: 'fkhare@shetty-raman.com', company: 'Comar, Banik and Tata', location: 'North Dumdum' },
+    { name: 'Mahika Vala', mobile: '4273796873', email: 'warya@yahoo.com', company: 'Dua-Sandhu', location: 'Farrukhabad' },
+    { name: 'Farhan Keer', mobile: '5696731163', email: 'xchander@chatterjee.org', company: 'Kakar-Sathe', location: 'Indore' },
+    { name: 'Ehsaan Lad', mobile: '08340161555', email: 'dalalryan@tailor.biz', company: 'Rege, Batra and Chaudhary', location: 'Tezpur' },
+    { name: 'Mishti Ghosh', mobile: '05631026121', email: 'dhari@dhar.com', company: 'Lall-Deep', location: 'Rajahmundry' },
+    { name: 'Tiya Deshmukh', mobile: '+910463818575', email: 'zoyamannan@gmail.com', company: 'Soman Inc', location: 'Raurkela Industrial Township' },
+    { name: 'Vardaniya Chadha', mobile: '04209626988', email: 'priyansh35@dara.com', company: 'Gera PLC', location: 'Thrissur' },
+    { name: 'Lavanya Mane', mobile: '+916190700411', email: 'adahhans@gmail.com', company: 'Walia-Babu', location: 'Tumkur' },
+    { name: 'Shray Gera', mobile: '03492304683', email: 'lagan89@gmail.com', company: 'Bakshi PLC', location: 'Gurgaon' },
+    { name: 'Tushar Vohra', mobile: '4276204925', email: 'bamble@iyer.org', company: 'Bal-Mane', location: 'Amravati' },
+    { name: 'Mohanlal Amble', mobile: '0654412041', email: 'zcherian@yahoo.com', company: 'Bhagat, Barman and Mannan', location: 'Howrah' },
+    { name: 'Zaina Karan', mobile: '2073016092', email: 'gbadal@chaudhari-tak.com', company: 'Devan-Sahni', location: 'Bhiwandi' },
+    { name: 'Ivana Lal', mobile: '+914493129088', email: 'vivaanlal@hotmail.com', company: 'Ramakrishnan-Bhat', location: 'Noida' },
+    { name: 'Romil Gole', mobile: '0613671074', email: 'nakultalwar@hotmail.com', company: 'Ganesan, Vig and Gour', location: 'Sultan Pur Majra' },
+    { name: 'Zoya Choudhry', mobile: '09116086639', email: 'nitya75@gmail.com', company: 'Khosla-Kaur', location: 'Bhopal' }
   ];
+  
   
   return (
     <>
