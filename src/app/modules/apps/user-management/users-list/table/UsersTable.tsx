@@ -78,15 +78,12 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
       )
     })
   ) : (
-   <tr>
 
-     <td colSpan={5}>
      
-    <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+    <div className='flex text-center mt-10  h-full w-full items-center justify-center'>
     No matching records found
   </div>
-     </td>
-   </tr>
+
  
   )}
 </tbody>

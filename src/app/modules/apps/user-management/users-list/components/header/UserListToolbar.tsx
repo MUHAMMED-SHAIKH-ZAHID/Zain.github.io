@@ -5,16 +5,18 @@ import {useListView} from '../../core/ListViewProvider'
 import {UsersListFilter} from './UsersListFilter'
 import AddProduct from '../../../../../../pages/datamanage/products/AddProduct';
 import { useNavigate } from 'react-router-dom';
-import AddUser from '../../../../../../pages/users/AddCustomer';
+import AddUser from '../../../../../../pages/users/customer/AddCustomer';
 import AddPurchase from '../../../../../../pages/purchase/AddPurchase';
 import AddProducts from '../../../../../../pages/datamanage/products/AddProducts';
-import AddCustomer from '../../../../../../pages/users/AddCustomer';
+import AddCustomer from '../../../../../../pages/users/customer/AddCustomer';
 import AddAccounts from '../../../../../../pages/account/AddTransaction';
 import AddExpenseCategory from '../../../../../../pages/account/AddExpenseCategory';
 import { CreateAppModal } from '../../../../../../../_metronic/partials';
 import CreateCategory from '../../../../../../pages/datamanage/category/CreateCategory';
 import CreateProduct from '../../../../../../pages/datamanage/products/CreateProduct';
 import CreateBrand from '../../../../../../pages/datamanage/brand/CreateBrand';
+import CreateSales from '../../../../../../pages/salespages/sales/CreateSales';
+import CreateSeller from '../../../../../../pages/users/sales/CreateSeller';
 
 interface TitleProps {
   Title: string;
@@ -28,7 +30,7 @@ const UsersListToolbar : React.FC<TitleProps> = ({Title}) => {
   const closeModal = () => setShowModal(false);
   
   const openAddUserModal = () => {
-    if(Title == 'Suplier'  || Title =='Customer' || Title == 'Product' || Title == 'Category' || Title == 'Brand'   ||  Title == 'Transaction' || Title == 'Expence Category '){
+    if(Title == 'Suplier'  || Title =='Customer' || Title == 'Product' || Title == 'Category' || Title == 'Brand'   ||  Title == 'Transaction' || Title == 'Expence Category' || Title =='Seller'){
     openModal()
     }else if(Title == 'Sales'){
       navigate('/sales/createsales')
@@ -83,6 +85,17 @@ const UsersListToolbar : React.FC<TitleProps> = ({Title}) => {
       </button>
         <CreateAppModal show={showModal} handleClose={closeModal} />
  
+
+      </>
+
+      }
+      { Title == 'Seller' && <>
+      
+      <button type='button' className='btn btn-primary btn-sm' onClick={openAddUserModal}>
+        <KTIcon iconName='plus' className='fs-2' />
+        Add {Title}
+      </button>
+      <CreateSeller show={showModal} handleClose={closeModal} />
 
       </>
 

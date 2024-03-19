@@ -8,35 +8,23 @@ type Props = {
   handleClose: () => void;
 };
 
+
 const validationSchema = Yup.object({
   productName: Yup.string().required('Product name is required'),
-  
   hsnCode: Yup.string()
-    .matches(/^[0-9]{6}$/, { message: 'HSN Code must be 6 digits', excludeEmptyString: true }), // Assuming HSN code is 6 digits. Adjust regex as needed.
-
-  gst: Yup.string()
-    .required('GST number is required')
-//.matches(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, { message: 'Invalid GST number' }), // This regex matches the typical format of Indian GST numbers. Adjust regex as needed.
-,caseQuantity: Yup.number()
-.typeError('Case quantity must be a number')
-.required('Case quantity is required')
-.positive('Case quantity must be positive')
-.integer('Case quantity must be an integer'),
-quantity: Yup.number()
-.typeError('Quantity must be a number')
-.required('Quantity is required')
-.positive('Quantity must be positive')
-.integer('Quantity must be an integer'),
+    .matches(/^[0-9]{6}$/, 'HSN Code must be 6 digits')
+    .required('HSN Code is required'),
+  category: Yup.string().required('Category is required'),
+  brand: Yup.string().required('Brand is required'),
 });
 
 const CreateProduct: FC<Props> = ({ show, handleClose }) => {
   const formik = useFormik({
     initialValues: {
       productName: '',
-      hsnCode:'',
-      gst:'',
-      caseQuantity:'',
-      quantity:'',
+      hsnCode: '',
+      category: '', 
+      brand: '', 
     },
     validationSchema,
     onSubmit: (values) => {
@@ -78,45 +66,50 @@ const CreateProduct: FC<Props> = ({ show, handleClose }) => {
               <div className="text-danger">{formik.errors.hsnCode}</div>
             )}
           </div>
-          <div className="mb-5">
-            <label htmlFor="caseQuantity" className="form-label required">Case Quantity </label>
-            <input
-              type="text"
-              className="form-control"
-              id="caseQuantity"
-              placeholder="Enter caseQuantity Code"
-              {...formik.getFieldProps('caseQuantity')}
-            />
-            {formik.touched.caseQuantity && formik.errors.caseQuantity && (
-              <div className="text-danger">{formik.errors.caseQuantity}</div>
-            )}
-          </div>
-          <div className="mb-5">
-            <label htmlFor="quantity" className="form-label required">Quantity </label>
-            <input
-              type="text"
-              className="form-control"
-              id="quantity"
-              placeholder="Enter Quantity"
-              {...formik.getFieldProps('gst')}
-            />
-            {formik.touched.gst && formik.errors.gst && (
-              <div className="text-danger">{formik.errors.gst}</div>
-            )}
-          </div>
-          <div className="mb-5">
-            <label htmlFor="gst" className="form-label required">Gst </label>
-            <input
-              type="text"
-              className="form-control"
-              id="gst"
-              placeholder="Enter Gst Code"
-              {...formik.getFieldProps('gst')}
-            />
-            {formik.touched.gst && formik.errors.gst && (
-              <div className="text-danger">{formik.errors.gst}</div>
-            )}
-          </div>
+ 
+
+
+
+<div className='col-lg-12'>
+              <label className='col-lg-4 col-form-label fw-bold fs-6'>
+                <span className='required'>Category</span>
+              </label>
+<div className=' fv-row'>
+                <select
+                  className='form-select form-select-solid form-select-lg fw-bold'
+                  {...formik.getFieldProps('category')}
+                >
+                  <option value=''>Select a Category</option>
+                  <option value="1">Category 1</option>
+  <option value="2">Category 2</option>
+                  <option value="1">Category 3</option>
+  <option value="2">Category 4</option>
+                  
+                </select>
+                {formik.touched.category && formik.errors.category ? (
+  <div className='text-danger'>{formik.errors.category}</div>
+) : null}
+              </div></div>
+<div className='col-lg-12'>
+              <label className='col-lg-4 col-form-label fw-bold fs-6'>
+                <span className='required'>Brand</span>
+              </label>
+<div className=' fv-row'>
+                <select
+                  className='form-select form-select-solid form-select-lg fw-bold'
+                  {...formik.getFieldProps('brand')}
+                >
+                  <option value=''>Select a Brand</option>
+                  <option value="1">Brand 1</option>
+  <option value="2">Brand 2</option>
+                  <option value="1">Brand 3</option>
+  <option value="2">Brand 4</option>
+                  
+                </select>
+                {formik.touched.brand && formik.errors.brand ? (
+  <div className='text-danger'>{formik.errors.brand}</div> 
+) : null}
+              </div></div>
           
         </Modal.Body>
         <Modal.Footer>

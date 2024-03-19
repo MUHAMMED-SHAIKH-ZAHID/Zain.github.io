@@ -206,6 +206,50 @@ const   userColumns: ReadonlyArray<Column<Suplier>> = [
 
 export {userColumns}
 
+interface Seller {
+  name: string;
+  email: string;
+  mobile: string;
+  role: string;
+}
+
+const sellerColumns: ReadonlyArray<Column<Seller>> = [
+  {
+    Header: "Name",
+    accessor: 'name', // accessor is the "key" in the data
+  },
+  {
+    Header: "Email",
+    accessor: 'email',
+  },
+  {
+    Header: "Mobile",
+    accessor: 'mobile',
+  },
+  {
+    Header: "Role",
+    accessor: 'role',
+  },
+  {
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+        <Link to='/seller/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+        <KTIcon iconName='switch' className='fs-3' />
+        </Link>
+        <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
+        <KTIcon iconName='pencil' className='fs-3' />
+        </a>
+        <a href='#' className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'>
+        <KTIcon iconName='trash' className='fs-3' />
+        </a>
+      </div>
+    ),
+  }
+];
+
+export { sellerColumns };
 
 const   productColumns: ReadonlyArray<Column<Purchase>> = [
   {

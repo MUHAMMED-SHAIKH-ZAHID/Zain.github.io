@@ -9,7 +9,7 @@ import {WithChildren} from '../../_metronic/helpers'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
 import Suplier from '../pages/suplier/Suplier'
 import Purchase from '../pages/purchase/Purchase'
-import Users from '../pages/users/Customer'
+import Users from '../pages/users/customer/Customer'
 import Reports from '../pages/reports/Reports'
 import { Account } from '../modules/profile/components/account/Account'
 import Products from '../pages/datamanage/products/Products'
@@ -18,7 +18,7 @@ import CreateSales from '../pages/sales/CreateSales'
 import AddSales from '../pages/sales/AddSalesForm'
 import AddProducts from '../pages/datamanage/products/AddProducts'
 import AddPurchase from '../pages/purchase/AddPurchase'
-import Customer from '../pages/users/Customer'
+import Customer from '../pages/users/customer/Customer'
 import RecentInvoice from '../pages/dashboard/RecentInvoice'
 import AddRecentInvoice from '../pages/dashboard/AddRecentInvoice'
 import CustomerSumary from '../pages/users/CustomerSumary'
@@ -32,15 +32,16 @@ import ExpenceCategory from '../pages/account/ExpenceCategory'
 import ExpenseList from '../pages/account/ExpenseList'
 import SupplierProfile from '../pages/suplier/SupplierProfile'
 import SalesProfile from '../pages/sales/SellerTable'
-import CustomerProfile from '../pages/users/CustomerProfile'
+import CustomerProfile from '../pages/users/customer/CustomerProfile'
 import SinglePurchaseDetails from '../pages/suplier/SinglePurchaseDetails'
-import AddCustomer from '../pages/users/AddCustomer'
+import AddCustomer from '../pages/users/customer/AddCustomer'
 import AddSalesForm from '../pages/sales/AddSalesForm'
 import DataManage from '../pages/DataManage'
 import PurchaseQuotatioin from '../pages/purchase/PurchaseQuotatioin'
 import SalesOrder from '../pages/sales/SalesOrder'
 import AddQuotePurchase from '../pages/purchase/AddQuotePurchase'
 import AddQuoteSales from '../pages/sales/AddQuoteSales'
+import Sellers from '../pages/users/sales/Sellers'
 
 
 const PrivateRoutes = () => {
@@ -80,9 +81,11 @@ const PrivateRoutes = () => {
         <Route path='/datamanage' element={<DataManage />} />
 
         {/* customer */}
-        <Route path='/customer' element={<Customer />} />
-        <Route path='/customer/createuser' element={<AddCustomer />} />
-        <Route path='/customer/profile' element={<CustomerProfile />} />
+        <Route path='/user' element={<Customer />} />
+        <Route path='/user/customer' element={<Customer />} />
+        <Route path='/user/customer/createuser' element={<AddCustomer />} />
+        <Route path='/user/customer/profile' element={<CustomerProfile />} />
+        <Route path='/user/seller' element={<Sellers />} />
    
 
 

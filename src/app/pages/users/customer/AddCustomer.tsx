@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { PageTitle } from '../../../_metronic/layout/core';
+import { PageTitle } from '../../../../_metronic/layout/core';
 
 
 

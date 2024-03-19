@@ -30,49 +30,40 @@ const SidebarMenuMain = () => {
            
           
 
-        <SidebarMenuItemWithSub
-          to='/purchase'
+        <SidebarMenuItem
+          to='/purchase/data'
           icon='office-bag'
           title='Purchase'
           fontIcon='bi-app-indicator'
-        >
-          <SidebarMenuItem
-            to='/purchase/data'
-            title='Purchase Details'
-           hasBullet={true}
-          /> 
-          <SidebarMenuItem
-            to='/purchase/quotation'
-            title='Purchase Quote'
-           hasBullet={true}
-          /> 
-        </SidebarMenuItemWithSub>
+        />
+        
 
-          <SidebarMenuItem
-            to='/customer'
+          <SidebarMenuItemWithSub
+            to='/user'
             icon='profile-circle'
-            title='Customer'
+            title='User'
             fontIcon='bi-app-indicator'
-          />
+          >
+                <SidebarMenuItem
+          to='/user/customer'
+          title='Customer'
+      hasBullet={true}
+        />
+                <SidebarMenuItem
+          to='/user/seller'
+          title='Sales Executive'
+      hasBullet={true}
+        />
+            </SidebarMenuItemWithSub>
        
 
-        <SidebarMenuItemWithSub
-          to='/sales'
+        <SidebarMenuItem
+          to='/sales/order  '
           icon='binance-usd'
           title='Sales'
           fontIcon='bi-app-indicator'
-        >
-        <SidebarMenuItem
-          to='/sales/data'
-          title='Sales Data'
-      hasBullet={true}
         />
-        <SidebarMenuItem
-          to='/sales/order'
-          title='Sales Quote'
-      hasBullet={true}
-        />
-        </SidebarMenuItemWithSub>
+        
      
         
         

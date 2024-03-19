@@ -1,5 +1,5 @@
-import { KTIcon } from '../../../_metronic/helpers'
-import { PageTitle } from '../../../_metronic/layout/core'
+import { KTIcon } from '../../../../_metronic/helpers'
+import { PageTitle } from '../../../../_metronic/layout/core'
 
 
 

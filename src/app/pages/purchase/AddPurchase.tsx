@@ -52,6 +52,12 @@ const handleShow = () => setShow(true);
     { id: 'user4', name: 'Suplier 4' },
     // Add more users as needed
   ];
+  const PaymentMethod = [
+    { id: 'user1', name: 'Cash' },
+    { id: 'user2', name: 'Card' },
+    { id: 'user3', name: 'Online Tansaction' },
+    // Add more users as needed
+  ];
   
   const products = [
     { id: 'prod1', name: 'Product 1' },
@@ -64,12 +70,18 @@ const handleShow = () => setShow(true);
     { id: 'cat2', name: 'Category 2' },
     // Add more categories as needed
   ];
+    const [payment, setPayment] = useState('');
+
+  const handlePaymentChange = (event) => {
+    setPayment(event.target.value);
+  };
 
 
     const [productName, setProductName] = useState('');
     const [category, setCategory] = useState('');
     const [brand, setBrand] = useState('');
     const [mrp, setMrp] = useState('');
+
   
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -154,13 +166,12 @@ const handleShow = () => setShow(true);
         <thead>
           <tr className='border-bottom-2'>
             <th scope='col'>Ean Code</th>
-            <th scope="col">Add Manualy</th>
+            <th scope="col">New Product</th>
             <th scope="col">Qty</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
             <th scope="col">Tax</th>
             <th scope="col">Total</th>
-            <th scope="col">Status</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -185,18 +196,7 @@ const handleShow = () => setShow(true);
     ((Number(item.qty) * Number(item.price)) * (Number(item.tax) / 100))
   ).toFixed(2)} 
 </td>
-<td>
-  <select 
-    className="form-control" 
-    value={item.name} 
-    onChange={(e) => handleInputChange(index, 'name', e.target.value)}
-  >
-    <option value="">Select </option>
-    <option value="Product 1">Paid</option>
-    <option value="Product 2">Unppaid</option>
-    <option value="Product 3">Partial</option>
-  </select>
-</td>
+
 <td><button type="button" className="btn btn-sm btn-danger" onClick={() => handleRemoveItem(index)}>  <span className='fs-8'>delete</span></button></td>
             </tr>
           ))}
@@ -205,7 +205,7 @@ const handleShow = () => setShow(true);
       <div className="d-flex col-lg-12 pt-6">
       <div className="col-lg-4">
 
-      <button type="button" className="btn btn-primary" onClick={handleAddItem}><KTIcon iconName='add-item' className='fs-3 ' /> <span className='fs-7'>Add Product</span></button>
+      <button type="button" className="btn btn-primary" onClick={handleAddItem}><KTIcon iconName='add-item' className='fs-3 ' /> <span className='fs-7'>Add Row</span></button>
       </div>
       <div className="col-lg-8">
       <div className="d-flex justify-content-between">
@@ -227,11 +227,72 @@ const handleShow = () => setShow(true);
 </div>
       </div>
       </div>
-      <div className="container my-4">
+     <div className="row col-12 my-5 py-5">
+     <div className="mb-3 col-lg-4">
+     <div className="mb-3">
+      <label className="form-label">Payment Option</label>
+      <div className="d-flex gap-4">
+
+      <div className="form-check">
+        <input 
+          className="form-check-input" 
+          type="radio" 
+          name="payment" 
+          id="paymentFull" 
+          value="Full" 
+          checked={payment === "Full"} 
+          onChange={handlePaymentChange} 
+        />
+        <label className="form-check-label" htmlFor="paymentFull">
+          Full
+        </label>
+      </div>
+      <div className="form-check">
+        <input 
+          className="form-check-input" 
+          type="radio" 
+          name="payment" 
+          id="paymentAdvance" 
+          value="Advance" 
+          checked={payment === "Advance"} 
+          onChange={handlePaymentChange} 
+        />
+        <label className="form-check-label" htmlFor="paymentAdvance">
+          Advance
+        </label>
+      </div>
+      </div>
+    </div>
+
+
+          </div>
+     <div className="mb-3 col-lg-4">
+            <label htmlFor="categoryName" className="form-label">Paid Amount</label>
+            <input
+              type="text"
+              className={'form-control'}
+              id="categoryName"
+              placeholder="Enter Paid Amount"
+            />
+         
+          </div>
+       
+          <div className="col-lg-4">
+          <label htmlFor="user" className="form-label">Mode Of Transaction</label>
+          <select className="form-select" id="suplier">
+            <option selected>Choose...</option>
+            {PaymentMethod.map(suplier => (
+              <option key={suplier.id} value={suplier.name}>{suplier.name}</option>
+            ))}
+          </select>
+        </div>
+      </div> 
+       
   {/* Notes Field */}
   <div className="mb-3">
     <textarea className="form-control" id="notes" rows="3" placeholder="Notes"></textarea>
   </div>
+      <div className="container my-4">
 
 
   <Modal show={show} onHide={handleClose}>
