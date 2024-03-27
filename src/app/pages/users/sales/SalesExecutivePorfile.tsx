@@ -1,27 +1,13 @@
-import { PageTitle } from '../../../_metronic/layout/core'
-import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
-import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
-import { ListViewProvider } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
-import { KTIcon } from '../../../_metronic/helpers'
-import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
-import { itemPurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
-import profilePhoto from '../../../_metronic/assets/custom/user3d.png'
+import { KTIcon } from '../../../../_metronic/helpers'
+import { PageTitle } from '../../../../_metronic/layout/core'
+import profilePhoto from '../../../../_metronic/assets/custom/user3d.png'
 
 
 
-const InvoiceList = () => {
-    const Data = Array.from({ length: 20 }, (_, index) => ({
-      item: `Item ${index + 1}`,
-      price: Math.random() * 100 + 1, // Random price between 1 and 100
-      quantity: Math.floor(Math.random() * 10) + 1, // Random quantity between 1 and 10
-      total: 0, // Initialized to 0, can be calculated dynamically if preferred
-    })).map(item => ({
-      ...item,
-      total: item.price * item.quantity, // Calculating total based on price and quantity
-    }));
-      
+
+function Details (){
     return (
-      <>
+        <>
             <div className='card mb-5 mb-xl-10'>
       <div className='card-body pt-9 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
@@ -37,7 +23,7 @@ const InvoiceList = () => {
               <div className='d-flex flex-column pt-16'>
                 <div className='d-flex align-items-center '>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Supplier Name
+                    Seller Name
                   </a>
                 
                 </div>
@@ -55,7 +41,7 @@ const InvoiceList = () => {
                     className='d-flex align-items-center text-gray-500 text-hover-dark mb-2'
                   >
                     <KTIcon iconName='sms' className='fs-4 me-1 text-dark' />
-                    suplier@gmail.com
+                    customer@gmail.com
                   </a>
                   </div>
                   <div className='d-flex flex-wrap fw-bold fs-6  pe-2'>
@@ -93,14 +79,14 @@ const InvoiceList = () => {
                 <div className='d-flex flex-wrap'>
                   <div className='border border-gray-300 border-dotted rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
-                    
-                      <div className='fs-3 fw-bolder'>Purchase Date</div>
+                      <KTIcon iconName='purchase' className='fs-3 text-dark me-2' />
+                      <div className='fs-2 fw-bolder'>7868</div>
                     </div>
 
-                    <div className='fw-bold text-center fs-6 text-gray-500'> 20/08/2000</div>
+                    <div className='fw-bold fs-6 text-gray-500'>Total Purchase</div>
                   </div>
 
-                  {/* <div className='border border-gray-300 border-ridge rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  <div className='border border-gray-300 border-ridge rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTIcon iconName='dollar' className='fs-3 text-warning me-2' />
                       <div className='fs-2 fw-bolder'>758k</div>
@@ -116,7 +102,7 @@ const InvoiceList = () => {
                     </div>
 
                     <div className='fw-bold fs-6 text-gray-500'>Credit Amount</div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 
@@ -137,7 +123,7 @@ const InvoiceList = () => {
                 }
                
               >
-                Items Details
+                Overview
               
             </div>
           
@@ -146,31 +132,34 @@ const InvoiceList = () => {
           </ul>
         </div>
       </div>
-          <UsersTable column={itemPurchaseColumns} Data={Data} Title={'Download'} />
     </div>
-     
-     
-      </>
+
+     {/* <div className="my-2 mt-5 fs-3 fw-bold ms-2">Purchase</div>     
+         <TotalPurcahseForSuplier /> */}
+        </>
     )
-  }
+}
 
-const InvoiceListWrapper = () => (
-    <QueryRequestProvider>
-      <QueryResponseProvider >
-        <ListViewProvider>
-          <InvoiceList />
-        </ListViewProvider>
-      </QueryResponseProvider>
-    </QueryRequestProvider>
-  )
 
-const SinglePurchaseDetails = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+const SalesExecutiveProfile = () => {
   return (
-    <div>
-         <PageTitle breadcrumbs={[]}>Purchase No : PN 288</PageTitle>
-      <InvoiceListWrapper />
-    </div>
+  <>
+  <PageTitle >Sales Excecutive Profile</PageTitle>
+  <Details />
+  </>
   )
 }
 
-export default SinglePurchaseDetails
+export default SalesExecutiveProfile

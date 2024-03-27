@@ -1,28 +1,15 @@
-import { PageTitle } from '../../../_metronic/layout/core'
-import { QueryRequestProvider } from '../../modules/apps/user-management/users-list/core/QueryRequestProvider'
-import { QueryResponseProvider } from '../../modules/apps/user-management/users-list/core/QueryResponseProvider'
-import { ListViewProvider } from '../../modules/apps/user-management/users-list/core/ListViewProvider'
 import { KTIcon } from '../../../_metronic/helpers'
-import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
-import { itemPurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import { PageTitle } from '../../../_metronic/layout/core'
 import profilePhoto from '../../../_metronic/assets/custom/user3d.png'
+import SellerPurchaseTable from '../sales/SellerPurchaseTable'
 
 
 
-const InvoiceList = () => {
-    const Data = Array.from({ length: 20 }, (_, index) => ({
-      item: `Item ${index + 1}`,
-      price: Math.random() * 100 + 1, // Random price between 1 and 100
-      quantity: Math.floor(Math.random() * 10) + 1, // Random quantity between 1 and 10
-      total: 0, // Initialized to 0, can be calculated dynamically if preferred
-    })).map(item => ({
-      ...item,
-      total: item.price * item.quantity, // Calculating total based on price and quantity
-    }));
-      
+
+function Details (){
     return (
-      <>
-            <div className='card mb-5 mb-xl-10'>
+        <>
+          <div className='card mb-5 mb-xl-10'>
       <div className='card-body pt-9 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
           <div className='me-7 mb-4'>
@@ -89,18 +76,20 @@ const InvoiceList = () => {
              
               </div> */}
               <div className='d-flex flex-wrap flex-stack'>
-              <div className='d-flex flex-column flex-grow-1 pe-8'>
-                <div className='d-flex flex-wrap'>
-                  <div className='border border-gray-300 border-dotted rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    <div className='d-flex align-items-center'>
-                    
-                      <div className='fs-3 fw-bolder'>Purchase Date</div>
+              <div className='d-flex flex-column flex-grow-1 pe-8 '>
+                <div className='d-flex flex-wrap mb-3'>
+                  <div className='border border-gray-300 border-dotted rounded min-w-275px py-3 px-4 me-6 ' style={{height:'50px'}}>
+                    <div className='d-flex align-items-center justify-content-between'>
+                      <div className='fs-2 fw-bolder text-center'>Purchase Id</div>
+                    <div className='fw-bold fs-6 text-center text-gray-500'>#234344</div>
                     </div>
 
-                    <div className='fw-bold text-center fs-6 text-gray-500'> 20/08/2000</div>
                   </div>
 
-                  {/* <div className='border border-gray-300 border-ridge rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                </div>
+                <div className="d-flex gap-2">
+
+                  <div className='border border-gray-300 border-ridge rounded min-w-125px  py-3 px-4 me-6 mb-3' >
                     <div className='d-flex align-items-center'>
                       <KTIcon iconName='dollar' className='fs-3 text-warning me-2' />
                       <div className='fs-2 fw-bolder'>758k</div>
@@ -112,11 +101,11 @@ const InvoiceList = () => {
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTIcon iconName='arrow-down' className='fs-3 text-danger me-2' />
-                      <div className='fs-2 fw-bolder'>600</div>
+                      <div className='fs-2 fw-bolder'>6002</div>
                     </div>
 
                     <div className='fw-bold fs-6 text-gray-500'>Credit Amount</div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 
@@ -137,7 +126,7 @@ const InvoiceList = () => {
                 }
                
               >
-                Items Details
+                Overview
               
             </div>
           
@@ -146,31 +135,34 @@ const InvoiceList = () => {
           </ul>
         </div>
       </div>
-          <UsersTable column={itemPurchaseColumns} Data={Data} Title={'Download'} />
     </div>
-     
-     
-      </>
+
+     <div className="my-2 mt-5 fs-3 fw-bold ms-2">Sale</div>     
+         <SellerPurchaseTable />
+        </>
     )
-  }
+}
 
-const InvoiceListWrapper = () => (
-    <QueryRequestProvider>
-      <QueryResponseProvider >
-        <ListViewProvider>
-          <InvoiceList />
-        </ListViewProvider>
-      </QueryResponseProvider>
-    </QueryRequestProvider>
-  )
 
-const SinglePurchaseDetails = () => {
+
+
+
+
+
+
+
+
+
+
+
+
+const PurchaseDetail = () => {
   return (
-    <div>
-         <PageTitle breadcrumbs={[]}>Purchase No : PN 288</PageTitle>
-      <InvoiceListWrapper />
-    </div>
+  <>
+  <PageTitle >Seller Profile</PageTitle>
+  <Details />
+  </>
   )
 }
 
-export default SinglePurchaseDetails
+export default PurchaseDetail

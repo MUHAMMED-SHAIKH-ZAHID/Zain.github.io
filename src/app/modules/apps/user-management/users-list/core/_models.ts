@@ -22,6 +22,8 @@ export type Suplier = {
   email?: string
   company?:string
   location?:string
+  mobile?:string
+  actions?:string
 }
 export type Account = {
   date?:string

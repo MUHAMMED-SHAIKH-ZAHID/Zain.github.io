@@ -42,6 +42,8 @@ import SalesOrder from '../pages/sales/SalesOrder'
 import AddQuotePurchase from '../pages/purchase/AddQuotePurchase'
 import AddQuoteSales from '../pages/sales/AddQuoteSales'
 import Sellers from '../pages/users/sales/Sellers'
+import PurchaseDetail from '../pages/purchase/PurchaseDetails'
+import SalesExecutiveProfile from '../pages/users/sales/SalesExecutivePorfile'
 
 
 const PrivateRoutes = () => {
@@ -72,9 +74,8 @@ const PrivateRoutes = () => {
   
         {/* Purchase */}
         <Route path='/purchase' element={<Purchase />} />
-        <Route path='/purchase/data' element={<Purchase />} />
         <Route path='/purchase/addpurchase' element={<AddPurchase />} />
-        <Route path='/purchase/quotation' element={<PurchaseQuotatioin />} />
+        <Route path='/purchase/detail' element={<PurchaseDetail />} />
         <Route path='/purchase/quotation/create' element={<AddQuotePurchase />} />
 
 
@@ -86,13 +87,13 @@ const PrivateRoutes = () => {
         <Route path='/user/customer/createuser' element={<AddCustomer />} />
         <Route path='/user/customer/profile' element={<CustomerProfile />} />
         <Route path='/user/seller' element={<Sellers />} />
+        <Route path='/user/seller/profile' element={<SalesExecutiveProfile />} />
    
 
 
         <Route path='/reports' element={<Reports />} />
         {/* Sales */}
         <Route path='/sales' element={<Sales />} />
-        <Route path='/sales/data' element={<Sales />} />
         <Route path='/sales/order' element={<SalesOrder />} />
         <Route path='/sales/order/create' element={<AddQuoteSales/>} />
         <Route path='/sales/profile' element={<SalesProfile />} />

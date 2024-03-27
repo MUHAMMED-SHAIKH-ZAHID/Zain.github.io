@@ -48,9 +48,11 @@ const UsersTable : React.FC<ColumnProps> = ({column,Data,Title }) => {
          >
           <thead>
           {headerGroups.map((headerGroup) => (
-          <tr className='' {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
+          <tr className=''  style={{
+                backgroundImage: 'linear-gradient(to right, #ebf4f5, #b5c6e0)'
+              }} {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()} scope='col' className={` text-dark fw-bolder fs-7 text-uppercase gs-0 ${column.id === "actions" ? 'text-end pe-8'  : 'text-start '}`} key={column.id}>
+              <th {...column.getHeaderProps()} scope='col'  style={{padding:"10px 0 10px 5px",}}  className={` text-dark fw-bolder fs-7 text-uppercase gs-0 ${column.id === "actions" ? 'text-end pe-8'  : 'text-start '}`} key={column.id}>
              {column.render('Header')}
               </th>
             ))}

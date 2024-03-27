@@ -105,7 +105,8 @@ export { invoiceColumns };
 
 
 
-const   suplierColumns: ReadonlyArray<Column<Suplier>> = [
+type ActionClick = (data: Suplier) => void;
+const   suplierColumns = (editActionClick : any ,deleteActionClick : any ): Column<Suplier>[] => [
  
   {
     Header:"Full Name",
@@ -137,18 +138,22 @@ const   suplierColumns: ReadonlyArray<Column<Suplier>> = [
         <Link to='/supplier/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
           <KTIcon iconName='switch' className='fs-3' />
         </Link>
-        <a
-          href='#'
-          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-        >
-          <KTIcon iconName='pencil' className='fs-3' />
-        </a>
-        <a
-          href='#'
+        <div
+         onClick={() => editActionClick(row.original)}
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </div>
+        <div
+           onClick={(e) => {
+    e.preventDefault(); 
+    e.stopPropagation();
+    deleteActionClick(row.original);
+  }}
           className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
         >
           <KTIcon iconName='trash' className='fs-3' />
-        </a>
+        </div>
       </div>
     ),
   }
@@ -158,7 +163,7 @@ const   suplierColumns: ReadonlyArray<Column<Suplier>> = [
 
 export {suplierColumns}
 
-const   userColumns: ReadonlyArray<Column<Suplier>> = [
+const   userColumns = (editActionClick : any ,deleteActionClick : any ): Column<Suplier>[] => [
  
   {
     Header:"Full Name",
@@ -171,32 +176,36 @@ const   userColumns: ReadonlyArray<Column<Suplier>> = [
   },
   {
     Header:"Company",
-    accessor: 'company',
+    accessor: 'companyName',
   },
   {
     Header: "Location",
-    accessor: 'location',
+    accessor: 'state',
   },
   {
     Header: "Actions",
     accessor: "actions",
     Cell: ({ row }) => (
       <div className='d-flex justify-content-end'>
-        <Link to='/customer/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+        <Link to='/user/customer/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
           <KTIcon iconName='switch' className='fs-3' />
         </Link>
-        <a
-          href='#'
-          className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-        >
-          <KTIcon iconName='pencil' className='fs-3' />
-        </a>
-        <a
-          href='#'
+        <div
+         onClick={() => editActionClick(row.original)}
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </div>
+        <div
+           onClick={(e) => {
+    e.preventDefault(); 
+    e.stopPropagation();
+    deleteActionClick(row.original);
+  }}
           className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
         >
           <KTIcon iconName='trash' className='fs-3' />
-        </a>
+        </div>
       </div>
     ),
   }
@@ -213,7 +222,7 @@ interface Seller {
   role: string;
 }
 
-const sellerColumns: ReadonlyArray<Column<Seller>> = [
+const sellerColumns = (editActionClick : any ,deleteActionClick : any ): Column<Seller>[] => [
   {
     Header: "Name",
     accessor: 'name', // accessor is the "key" in the data
@@ -235,15 +244,25 @@ const sellerColumns: ReadonlyArray<Column<Seller>> = [
     accessor: "actions",
     Cell: ({ row }) => (
       <div className='d-flex justify-content-end'>
-        <Link to='/seller/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+        <Link to={'/user/seller/profile'} className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
         <KTIcon iconName='switch' className='fs-3' />
         </Link>
-        <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
+         <div
+         onClick={() => editActionClick(row.original)}
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
         <KTIcon iconName='pencil' className='fs-3' />
-        </a>
-        <a href='#' className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'>
-        <KTIcon iconName='trash' className='fs-3' />
-        </a>
+      </div>
+        <div
+           onClick={(e) => {
+    e.preventDefault(); 
+    e.stopPropagation();
+    deleteActionClick(row.original);
+  }}
+          className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+        >
+          <KTIcon iconName='trash' className='fs-3' />
+        </div>
       </div>
     ),
   }
@@ -362,7 +381,7 @@ export {brandColumns};
 
 
 export type ActionClickHandler = (rowData: Purchase) => void;
-const salesColumns  = (handleActionClick : any): Column<sales>[] => [
+const salesColumns  = (editActionClick : any): Column<sales>[] => [
   {
     Header: "ID",
     accessor: 'orderID',
@@ -397,12 +416,12 @@ const salesColumns  = (handleActionClick : any): Column<sales>[] => [
        <Link to='/sales/profile' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
           <KTIcon iconName='switch' className='fs-3' />
         </Link>
-      <a
-        href='#'
+      <div
+         onClick={() => editActionClick(row.original)}
         className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
       >
         <KTIcon iconName='pencil' className='fs-3' />
-      </a>
+      </div>
       <a
         href='#'
         className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
@@ -481,25 +500,21 @@ export {quoteColumns}
 const PurchaseColumns: ReadonlyArray<Column<Purchase>> = [
   {
     Header: "Id",
-    accessor: 'id',
+    accessor: 'purchaseId',
   },
 
   {
     Header: "Suplier Name",
-    accessor: 'supliername',
+    accessor: 'supplier',
   },
   {
     Header: "Invoice Number",
     accessor: 'invoice',
   },
   {
-    Header: "Purchase Price",
-    accessor: 'purchasePrice',
-    Cell:({row}) => {
-      return (  <div className=''>
-        <span className={`   `}> &nbsp; {row.original.purchasePrice}</span>
-      </div>)
-    }
+    Header: 'Total Amount',
+    accessor: row => parseFloat(row.paidAmount) + parseFloat(row.balanceAmount),
+    Cell: ({ value }) => `${value.toFixed(2)}`,
   },
  
   {
@@ -528,7 +543,7 @@ const PurchaseColumns: ReadonlyArray<Column<Purchase>> = [
     accessor: "actions",
     Cell: ({ row }) => (
       <div className='d-flex justify-content-end'>
-       <Link to='#' className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
+       <Link to={'/purchase/detail'} className='btn btn-icon btn-bg-light btn-active-color-success btn-sm me-1'>
           <KTIcon iconName='switch' className='fs-3' />
         </Link>
       <a
@@ -689,10 +704,10 @@ const suplierpurchaseColumns: ReadonlyArray<Column<PurchaseData>> = [
     accessor: 'preview',
     Cell:({row}) => {
       return (
-        <div className="d-flex ms-5">
+        <div className="d-flex ">
        <Link  to={'/supplier/profile/spurchase'} >
 
-        <KTIcon iconName='eye' className='fs-3' /> 
+       <button type="button" className="btn btn-dark btn-sm btn-pulse">View</button>
         </Link>
         </div>
       )
@@ -717,15 +732,25 @@ const sellerpurchaseColumns: ReadonlyArray<Column<PurchaseData>> = [
     Cell: ({ value }) => `${value.toFixed(2)}`,
   },
   {
-    Header: "Preview",
-    accessor: 'preview',
-    Cell:({row}) => {
-      return (
-        <div className="d-flex ms-5">
-        <KTIcon iconName='eye' className='fs-3' />
-        </div>
-      )
-    }
+    Header: "Actions",
+    accessor: "actions",
+    Cell: ({ row }) => (
+      <div className='d-flex justify-content-end'>
+      
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
+      >
+        <KTIcon iconName='pencil' className='fs-3' />
+      </a>
+      <a
+        href='#'
+        className='btn btn-icon btn-bg-light btn-active-color-danger btn-sm'
+      >
+        <KTIcon iconName='trash' className='fs-3' />
+      </a>
+    </div>
+    ),
   },
 ];
 

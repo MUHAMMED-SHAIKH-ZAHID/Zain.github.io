@@ -14,6 +14,9 @@ const validationSchema = Yup.object({
   hsnCode: Yup.string()
     .matches(/^[0-9]{6}$/, 'HSN Code must be 6 digits')
     .required('HSN Code is required'),
+  eanCode: Yup.string()
+    .matches(/^[0-9]{6}$/, 'HSN Code must be 6 digits')
+    .required('HSN Code is required'),
   category: Yup.string().required('Category is required'),
   brand: Yup.string().required('Brand is required'),
 });
@@ -25,6 +28,7 @@ const CreateProduct: FC<Props> = ({ show, handleClose }) => {
       hsnCode: '',
       category: '', 
       brand: '', 
+      eanCode:'',
     },
     validationSchema,
     onSubmit: (values) => {
@@ -64,6 +68,20 @@ const CreateProduct: FC<Props> = ({ show, handleClose }) => {
             />
             {formik.touched.hsnCode && formik.errors.hsnCode && (
               <div className="text-danger">{formik.errors.hsnCode}</div>
+            )}
+          </div>
+ 
+          <div className="mb-5">
+            <label htmlFor="hsnCode" className="form-label ">Ean Code</label>
+            <input
+              type="text"
+              className="form-control"
+              id="eanCode"
+              placeholder="Enter Ean Code"
+              {...formik.getFieldProps('eanCode')}
+            />
+            {formik.touched.eanCode && formik.errors.eanCode && (
+              <div className="text-danger">{formik.errors.eanCode}</div>
             )}
           </div>
  

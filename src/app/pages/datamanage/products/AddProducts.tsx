@@ -33,7 +33,7 @@ const AddProducts: FC<Props> = ({ show, handleClose }) => {
       category: '',
       supplier: '',
       brand: '',
-      unitsPerPack: '',
+     
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {

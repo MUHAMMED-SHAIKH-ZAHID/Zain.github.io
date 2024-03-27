@@ -1,113 +1,151 @@
-import { useState } from 'react';
+import  { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { PageTitle } from '../../../_metronic/layout/core';
+import { Button } from 'react-bootstrap';
+import CreateProduct from '../datamanage/products/CreateProduct';
 import { KTIcon } from '../../../_metronic/helpers';
-import { Modal,Button ,Form } from 'react-bootstrap';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+
+
+
+const purchaseFormSchema = Yup.object().shape({
+  purchaseId: Yup.string().required('Purchase ID is required'), // Validation for purchase ID
+  supplier: Yup.string().required('Supplier is required'),
+  purchaseDate: Yup.date().nullable().required('Purchase date is required'),
+  payment: Yup.number().required('Payment option is required'),
+  paidAmount: Yup.number().when('payment', (paymentValue: any, schema) => {
+    const payment: string = paymentValue; // Type assertion
+    return (payment === 'Advance' || payment === 'Credit') 
+      ? schema.required('Paid amount is required').min(0) 
+      : schema.notRequired();
+  }),
+  balanceAmount: Yup.number().when('payment', (paymentValue: any, schema) => {
+    const payment: string = paymentValue; // Type assertion
+    return (payment === 'Advance' || payment === 'Credit') 
+      ? schema.required('Balance amount is required').min(0) 
+      : schema.notRequired();
+  }),
+  lastDate: Yup.date().nullable().when('payment', (paymentValue: any, schema) => {
+    const payment: string = paymentValue; // Type assertion
+    return (payment === 'Advance' || payment === 'Credit') 
+      ? schema.required('Last date is required') 
+      : schema.notRequired();
+  }),
+  items: Yup.array().of(
+    Yup.object().shape({
+      ean: Yup.string().required('EAN is required'),
+      qty: Yup.number().min(1).required('Quantity is required'),
+      price: Yup.number().min(1).required('Price is required'),
+      discount: Yup.number().min(0).max(100),
+      tax: Yup.number().min(0).max(100),
+    })
+  ),
+  totalDiscount: Yup.number()
+  .min(0, 'Total discount must be positive')
+  .max(Yup.ref('salePrice'), 'Total discount cannot exceed the sale price'),
+  status: Yup.string().required('Status is required'),
+  modeOfTransaction: Yup.string()
+  .required('Mode of transaction is required'),
+  notes: Yup.string(), // Notes field validation
+})
+  
+ 
+
+
+
 
 interface Item {
-    id: number;
-    name: string;
-    qty: number;
-    price: number;
-  }
+  id: number;
+  name: string;
+  qty: number;
+  price: number;
+  discount: number;
+  tax: number;
+  ean: string;
+}
+interface FormValues {
+  items: Item[];
+}
 
-const AddPurchaseWrap : React.FC = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-const handleShow = () => setShow(true);
-  
-  const [items, setItems] = useState<Item[]>([
-    { id: Date.now(), name: '', qty: 1, price: 0, discount: 0, tax: 0 },
-  ]);
-  
-    const handleInputChange = (index: number, field: keyof Item, value: string) => {
-      const newItems = [...items];
-      const item = newItems[index];
-      if (field === 'qty' || field === 'price') {
-        item[field] = parseFloat(value);
-      } else {
-        item[field] = value;
-      }
-      setItems(newItems);
-    };
-  
-    const handleRemoveItem = (index: number) => {
-      const newItems = items.filter((_, i) => i !== index);
-      setItems(newItems);
-    };
-  
-    const handleAddItem = () => {
-      setItems([...items, { id: Date.now(), name: '', qty: 1, price: 0, discount: 0, tax: 0 }]);
-    };
-  
-  const [invoiceDate, setInvoiceDate] = useState<Date | null>(new Date());
-  const [dueDate, setDueDate] = useState<Date | null>(new Date());
-  const [invoiceNumber, setInvoiceNumber] = useState<string>('2021001');
+const AddPurchaseWrap: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
-  const suplier = [
-    { id: 'user1', name: 'Suplier 1' },
-    { id: 'user2', name: 'Suplier 2' },
-    { id: 'user3', name: 'Suplier 3' },
-    { id: 'user4', name: 'Suplier 4' },
-    // Add more users as needed
-  ];
   const PaymentMethod = [
-    { id: 'user1', name: 'Cash' },
-    { id: 'user2', name: 'Card' },
-    { id: 'user3', name: 'Online Tansaction' },
-    // Add more users as needed
+    { id: 'payment1', name: 'Cash' },
+    { id: 'payment2', name: 'Card' },
+    { id: 'payment3', name: 'Online Transaction' },
   ];
-  
-  const products = [
-    { id: 'prod1', name: 'Product 1' },
-    { id: 'prod2', name: 'Product 2' },
-    // Add more products as needed
-  ];
-  
-  const categories = [
-    { id: 'cat1', name: 'Category 1' },
-    { id: 'cat2', name: 'Category 2' },
-    // Add more categories as needed
-  ];
-    const [payment, setPayment] = useState('');
 
-  const handlePaymentChange = (event) => {
-    setPayment(event.target.value);
+  const formik = useFormik({
+    initialValues: {
+      purchaseId: '', // Added field for purchase ID
+      supplier: '', // Renamed from supplierId to supplier for clarity
+      payment: '',
+      purchaseDate: Date.now(),
+      paidAmount: '',
+      balanceAmount: '',
+      lastDate: null,
+      items: [{ ean: '', qty: 1, price: 0, discount: 0, tax: 0 }],
+      totalDiscount:'',
+      status:'',
+      modeOfTransaction:'',
+      notes: '',
+    },
+    validationSchema:purchaseFormSchema,
+    onSubmit: (values) => {
+      console.log(values);
+      // Further processing or API call
+    },
+  });
+
+  const calculateItemTotal = (index) => {
+    const item = formik.values.items[index];
+    const priceAfterDiscount = item.price - (item.price * item.discount) / 100;
+    const priceAfterTax = priceAfterDiscount + (priceAfterDiscount * item.tax) / 100;
+    return item.qty * priceAfterTax;
   };
 
+  const calculateTotal = () => {
+    return formik.values.items.reduce((acc, item, index) => acc + calculateItemTotal(index), 0);
+  };
 
-    const [productName, setProductName] = useState('');
-    const [category, setCategory] = useState('');
-    const [brand, setBrand] = useState('');
-    const [mrp, setMrp] = useState('');
+  const addItem = () => {
+    formik.setFieldValue('items', [...formik.values.items, { ean: '', qty: 1, price: 0, discount: 0, tax: 0 }]);
+  };
 
+  const removeItem = (index) => {
+    const itemsCopy = [...formik.values.items];
+    itemsCopy.splice(index, 1);
+    formik.setFieldValue('items', itemsCopy);
+  };
+
+  const calculateTotalPrice = () => {
+    return formik.values.items.reduce((acc, item) => {
+      const itemTotal = item.qty * item.price; // Calculate total for each item
+      return acc + itemTotal;
+    }, 0); // Start accumulating from 0
+  };
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      const productDetails = {
-        productName,
-        category,
-        brand,
-        mrp
-      };
-      console.log(productDetails);
-      // Handle product details submission here (e.g., send to API)
-      handleClose(); // Close modal after submission
-    };
-    
-  
-
+  const calculateGrandTotal = (totalPrice:any) => {
+    const discount = totalPrice * (formik.values.totalDiscount / 100); // Convert percentage to a decimal and apply
+    return totalPrice - discount; // Subtract discount from total price
+  };
   return (
+        <form onSubmit={formik.handleSubmit}>
     <div className=" card p-5">
         <div className='d-flex flex-column align-items-start flex-xxl-row '>
-      {/* Invoice Date */}
       <div className="d-flex align-items-center flex-equal fw-row me-4 order-2" title="Specify invoice date">
         <div className="fs-6 fw-bold text-gray-700 text-nowrap me-2">Date:</div>
-        <DatePicker 
-          selected={invoiceDate} 
-          onChange={(date: Date) => setInvoiceDate(date)}
-          className="form-control form-control-transparent fw-bold pe-5" 
+        <DatePicker
+          selected={formik.values.purchaseDate}
+          onChange={(date) => formik.setFieldValue('purchaseDate', date)}
+          className="form-control"
+          dateFormat="d MMMM  yyyy"
         />
       </div>
 
@@ -124,35 +162,37 @@ const handleShow = () => setShow(true);
 
       {/* Due Date */}
       <div className="d-flex align-items-center justify-content-end flex-equal order-3 fw-row" title="Specify invoice due date">
-        <div className="fs-6 fw-bold text-gray-700 text-nowrap me-2">Quotation Id:</div>
-        <input 
-          type="text" 
-          className="form-control form-control-flush fw-bold text-muted fs-3 w-125px" 
-          value={`#${invoiceNumber}`} 
-          onChange={(e) => setInvoiceNumber(e.target.value)} 
+        <div className="fs-6 fw-bold text-gray-700 text-nowrap me-2">Purchase Id:</div>
+        <input
+          id="purchaseId"
+          type="text"
+          className="form-control"
+          {...formik.getFieldProps('purchaseId')}
         />
+        {formik.touched.purchaseId && formik.errors.purchaseId && (
+  <div className="text-danger">{formik.errors.purchaseId}</div>
+)}
+
       </div>
       </div>
       <div className="container py-10">
       <div className="row col-lg-12 mb-3">
 
-        {/* <div className="col-lg-6">
-          <label htmlFor="product" className="form-label">Product</label>
-          <select className="form-select" id="product">
-            <option selected>Choose...</option>
-            {products.map(product => (
-              <option key={product.id} value={product.name}>{product.name}</option>
-            ))}
-          </select>
-        </div> */}
         <div className="col-lg-4">
           <label htmlFor="user" className="form-label">Suplier</label>
-          <select className="form-select" id="suplier">
-            <option selected>Choose...</option>
-            {suplier.map(suplier => (
-              <option key={suplier.id} value={suplier.name}>{suplier.name}</option>
-            ))}
-          </select>
+          <select
+          id="supplier"
+          className="form-control"
+          {...formik.getFieldProps('supplier')}
+        >
+          <option value="">Select a supplier</option>
+          {/* Populate with actual supplier IDs and names */}
+          <option value="supplier1">Supplier 1</option>
+          <option value="supplier2">Supplier 2</option>
+        </select>
+        {formik.touched.supplier && formik.errors.supplier && (
+  <div className="text-danger">{formik.errors.supplier}</div>
+)}
         </div>
       
        
@@ -166,7 +206,7 @@ const handleShow = () => setShow(true);
         <thead>
           <tr className='border-bottom-2'>
             <th scope='col'>Ean Code</th>
-            <th scope="col">New Product</th>
+            <th scope="col">New</th>
             <th scope="col">Qty</th>
             <th scope="col">Price</th>
             <th scope="col">Discount</th>
@@ -176,28 +216,80 @@ const handleShow = () => setShow(true);
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
-            <tr key={item.id} className='py-10'>
-      <td><input type="number" className="form-control" placeholder="Ean" value={item.qty} onChange={(e) => handleInputChange(index, 'qty', e.target.value)} /></td>
-<td>      <Button className='btn btn-md fs-7' variant="primary" onClick={handleShow}>
-        Add 
+
+
+{formik.values.items.map((item, index) => (
+            <tr key={index} className='py-10'>
+              <td> <input
+      type="text"
+      className="form-control"
+      placeholder="EAN Code"
+      {...formik.getFieldProps(`items[${index}].ean`)}
+    />
+    {formik.touched.items?.[index]?.ean && formik.errors.items?.[index]?.ean && (
+      <div className="text-danger">{formik.errors.items[index].ean}</div>
+    )}</td>
+<td>      <Button className='btn btn-sm justify-content-center d-flex align-items-center' variant="light" onClick={()=>openModal()}>
+        
+      <KTIcon iconName='plus-square' className='fs-5  text-dark' />
       </Button>
+
 </td>
 
+<td> <input
+      type="number"
+      className="form-control"
+      placeholder="Quantity"
+      {...formik.getFieldProps(`items[${index}].qty`)}
+    />
+    {formik.touched.items?.[index]?.qty && formik.errors.items?.[index]?.qty && (
+      <div className="text-danger">{formik.errors.items[index].qty}</div>
+    )}</td>
 
-                <td><input type="number" className="form-control" placeholder="Qty" value={item.qty} onChange={(e) => handleInputChange(index, 'qty', e.target.value)} /></td>
-                <td><input type="number" className="form-control" placeholder="Price" value={item.price} onChange={(e) => handleInputChange(index, 'price', e.target.value)} /></td>
-                <td><input type="number" className="form-control" placeholder="Discount" value={item.discount} onChange={(e) => handleInputChange(index, 'discount', e.target.value)} /></td>
-                <td><input type="number" className="form-control" placeholder="Tax" value={item.tax} onChange={(e) => handleInputChange(index, 'tax', e.target.value)} /></td>
+    <td> <input
+      type="number"
+      className="form-control"
+      placeholder="Price"
+      {...formik.getFieldProps(`items[${index}].price`)}
+    />
+    {formik.touched.items?.[index]?.price && formik.errors.items?.[index]?.price && (
+      <div className="text-danger">{formik.errors.items[index].price}</div>
+    )}</td>
+
+    <td>
+    <input
+      type="number"
+      className="form-control"
+      placeholder="Discount (%)"
+      {...formik.getFieldProps(`items[${index}].discount`)}
+    />
+    {formik.touched.items?.[index]?.discount && formik.errors.items?.[index]?.discount && (
+      <div className="text-danger">{formik.errors.items[index].discount}</div>
+    )}
+   
+    </td>
+<td>
+<input
+      type="number"
+      className="form-control"
+      placeholder="Tax (%)"
+      {...formik.getFieldProps(`items[${index}].tax`)}
+    />
+    {formik.touched.items?.[index]?.tax && formik.errors.items?.[index]?.tax && (
+      <div className="text-danger">{formik.errors.items[index].tax}</div>
+    )}
+</td>
+
                 <td>
-  {(
-    (Number(item.qty) * Number(item.price)) - 
-    ((Number(item.qty) * Number(item.price)) * (Number(item.discount) / 100)) + 
-    ((Number(item.qty) * Number(item.price)) * (Number(item.tax) / 100))
-  ).toFixed(2)} 
+                {(() => {
+        const priceAfterDiscount = item.price - (item.price * item.discount / 100);
+        const priceAfterTax = priceAfterDiscount + (priceAfterDiscount * item.tax / 100);
+        const total = item.qty * priceAfterTax;
+        return total.toFixed(2);
+      })()}
 </td>
 
-<td><button type="button" className="btn btn-sm btn-danger" onClick={() => handleRemoveItem(index)}>  <span className='fs-8'>delete</span></button></td>
+<td><button type="button" className="btn btn-sm btn-danger"onClick={() => formik.setFieldValue('items', formik.values.items.filter((_, i) => i !== index))}>  <span className='fs-8'>delete</span></button></td>
             </tr>
           ))}
         </tbody>
@@ -205,168 +297,168 @@ const handleShow = () => setShow(true);
       <div className="d-flex col-lg-12 pt-6">
       <div className="col-lg-4">
 
-      <button type="button" className="btn btn-primary" onClick={handleAddItem}><KTIcon iconName='add-item' className='fs-3 ' /> <span className='fs-7'>Add Row</span></button>
-      </div>
-      <div className="col-lg-8">
-      <div className="d-flex justify-content-between">
-  <div className="Subtotal text-white-200 fw-bold" style={{ fontSize: '14px' }}>Qty</div>
-  <div className="text-white-200 fw-bold" style={{ fontSize: '14px' }}>00</div>
-</div>
-      <div className="d-flex justify-content-between">
-  <div className="Subtotal text-white-200 fw-bold" style={{ fontSize: '13px' }}>Sale Price</div>
-  <div className="text-white-200 fw-bold" style={{ fontSize: '13px' }}></div>
-</div>
-      <div className="d-flex justify-content-between">
-  <div className="Subtotal text-white-200 fw-bold" style={{ fontSize: '14px' }}>Add Discount</div>
-  <div className="text-white-200 fw-bold" style={{ fontSize: '14px' }}></div>
-</div>
-<div className="border my-6"></div>
-<div className="d-flex justify-content-between">
-  <div className="Subtotal text-white-200 fw-bold" style={{ fontSize: '14px' }}>Total</div>
-  <div className="text-white-200 fw-bold" style={{ fontSize: '14px' }}></div>
-</div>
+      <button type="button" className="btn btn-primary" onClick={addItem}><KTIcon iconName='add-item' className='fs-3 ' /> <span className='fs-7'>Add Row</span></button> 
       </div>
       </div>
-     <div className="row col-12 my-5 py-5">
-     <div className="mb-3 col-lg-4">
-     <div className="mb-3">
-      <label className="form-label">Payment Option</label>
-      <div className="d-flex gap-4">
+      <div>
+      <div className="row col-12 my-5 py-5">
 
-      <div className="form-check">
-        <input 
-          className="form-check-input" 
-          type="radio" 
-          name="payment" 
-          id="paymentFull" 
-          value="Full" 
-          checked={payment === "Full"} 
-          onChange={handlePaymentChange} 
+      <div className="mb-3 col-lg-4">
+  <div className="col lg-4">
+    <label htmlFor="price" className='form-label'>Sale Price</label>
+    <input type="text" disabled value={calculateTotalPrice().toFixed(2)} className='form-control'/>
+  </div>
+  </div>
+  <div className='col-lg-4'>
+  <label htmlFor="totalDiscount" className="form-label">Discount (%)</label>
+  <input
+    id="totalDiscount"
+    type="number"
+    className="form-control"
+    {...formik.getFieldProps('totalDiscount')}
+  />
+  {formik.touched.totalDiscount && formik.errors.totalDiscount && (
+    <div className="text-danger">{formik.errors.totalDiscount}</div>
+  )}
+</div>
+  <div className="col lg-4">
+    <label htmlFor="price" className='form-label'>Grand Total</label>
+    <input type="text" disabled value={calculateGrandTotal(calculateTotalPrice()).toFixed(2)} className='form-control'/>
+  </div>
+</div>
+</div>
+
+<div className="row col-12 my-5 py-5">
+
+
+      <div className="mb-3 col-lg-4">
+  <label className="form-label">Payment Option</label>
+  <div className="d-flex gap-4">
+    {['Full', 'Advance', 'Credit'].map(option => (
+      <div className="form-check" key={option}>
+        <input
+          className="form-check-input"
+          type="radio"
+          name="payment"
+          id={`payment${option}`}
+          value={option}
+          checked={formik.values.payment === option}
+          onChange={() => formik.setFieldValue('payment', option)}
         />
-        <label className="form-check-label" htmlFor="paymentFull">
-          Full
+        <label className="form-check-label" htmlFor={`payment${option}`}>
+          {option}
         </label>
+        {formik.touched.payment && formik.errors.payment && (
+  <div className="text-danger">{formik.errors.payment}</div>
+)}
       </div>
-      <div className="form-check">
-        <input 
-          className="form-check-input" 
-          type="radio" 
-          name="payment" 
-          id="paymentAdvance" 
-          value="Advance" 
-          checked={payment === "Advance"} 
-          onChange={handlePaymentChange} 
-        />
-        <label className="form-check-label" htmlFor="paymentAdvance">
-          Advance
-        </label>
-      </div>
-      </div>
+    ))}
+  </div>
+</div>
+{(formik.values.payment === 'Advance' || formik.values.payment === 'Credit') && (
+  <>
+    <div className="mb-3 col-lg-4">
+      <label htmlFor="paidAmount" className="form-label">Paid Amount</label>
+      <input
+        type="number"
+        className="form-control"
+        id="paidAmount"
+        {...formik.getFieldProps('paidAmount')}
+      />
+      {formik.touched.paidAmount && formik.errors.paidAmount && (
+        <div className="text-danger">{formik.errors.paidAmount}</div>
+      )}
     </div>
 
+    <div className="mb-3 col-lg-4">
+      <label htmlFor="balanceAmount" className="form-label">Balance Amount</label>
+      <input
+        type="number"
+        className="form-control"
+        id="balanceAmount"
+        {...formik.getFieldProps('balanceAmount')}
+      />
+      {formik.touched.balanceAmount && formik.errors.balanceAmount && (
+        <div className="text-danger">{formik.errors.balanceAmount}</div>
+      )}
+    </div>
 
-          </div>
-     <div className="mb-3 col-lg-4">
-            <label htmlFor="categoryName" className="form-label">Paid Amount</label>
-            <input
-              type="text"
-              className={'form-control'}
-              id="categoryName"
-              placeholder="Enter Paid Amount"
-            />
-         
-          </div>
-       
-          <div className="col-lg-4">
-          <label htmlFor="user" className="form-label">Mode Of Transaction</label>
-          <select className="form-select" id="suplier">
-            <option selected>Choose...</option>
-            {PaymentMethod.map(suplier => (
-              <option key={suplier.id} value={suplier.name}>{suplier.name}</option>
-            ))}
-          </select>
-        </div>
-      </div> 
-       
-  {/* Notes Field */}
-  <div className="mb-3">
-    <textarea className="form-control" id="notes" rows="3" placeholder="Notes"></textarea>
-  </div>
+    <div className="mb-3 col-lg-4">
+      <label htmlFor="lastDate" className="form-label">Last Date</label>
+      <DatePicker
+        selected={formik.values.lastDate}
+        onChange={(date) => formik.setFieldValue('lastDate', date)}
+        className="form-control"
+      />
+      {formik.touched.lastDate && formik.errors.lastDate && (
+        <div className="text-danger">{formik.errors.lastDate}</div>
+      )}
+    </div>
+  </>
+)}
+<div className="mb-3 col-lg-4">
+  <label htmlFor="modeOfTransaction" className="form-label">Mode Of Transaction</label>
+  <select
+    id="modeOfTransaction"
+    className="form-control"
+    {...formik.getFieldProps('modeOfTransaction')}
+  >
+    <option value="">Select Mode of Transaction</option>
+    {PaymentMethod.map(method => (
+      <option key={method.id} value={method.name}>{method.name}</option>
+    ))}
+  </select>
+  {formik.touched.modeOfTransaction && formik.errors.modeOfTransaction && (
+    <div className="text-danger">{formik.errors.modeOfTransaction}</div>
+  )}
+</div>
+{/* Status Select Box */}
+<div className="mb-3 col-lg-4">
+  <label htmlFor="status" className="form-label">Order Status</label>
+  <select
+    id="status"
+    className="form-control"
+    {...formik.getFieldProps('status')}
+  >
+    <option value="">Order Status</option>
+    <option value="Hold">Hold</option>
+    <option value="Placed">Placed</option>
+    <option value="Transit">Transit</option>
+    <option value="Partial">Partial</option>
+  </select>
+  {formik.touched.status && formik.errors.status && (
+    <div className="text-danger">{formik.errors.status}</div>
+  )}
+</div>
+</div>
+
+<div className="mb-3">
+  <label htmlFor="notes" className="form-label">Notes</label>
+  <textarea
+    id="notes"
+    placeholder='Please Add Notes'
+    className="form-control"
+    rows={3}
+    {...formik.getFieldProps('notes')}
+  ></textarea>
+</div>
+
+
       <div className="container my-4">
 
 
-  <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Product</Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Body>
-          <Form.Group className="mb-3">
-  <Form.Label>Product Name</Form.Label>
-  <Form.Select 
-    value={productName} 
-    onChange={(e) => setProductName(e.target.value)} 
-    required
-  >
-    <option value="">Select Product</option>
-    <option value="Product 1">Product 1</option>
-    <option value="Product 2">Product 2</option>
-    <option value="Product 3">Product 3</option>
-    <option value="Product 4">Product 4</option>
-    <option value="Product 5">Product 5</option>
-  </Form.Select>
-</Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Brand</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>MRP</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter MRP"
-                value={mrp}
-                onChange={(e) => setMrp(e.target.value)}
-                required
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" type="submit">
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
   {/* Send Invoice Button */}
   <div className="d-flex justify-content-center mt-5">
-    <button className="btn btn-dark" type="button">Create Sale</button>
+    <button className="btn btn-dark" type="submit">Create Sale</button>
   </div>
 </div>
+<CreateProduct show={showModal} handleClose={closeModal} />
 
 
     </div>
     </div>
+    </form>
   );
 };
 

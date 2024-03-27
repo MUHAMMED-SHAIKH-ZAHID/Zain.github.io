@@ -43,10 +43,10 @@ const SuplierList = () => {
     actions:string
   }
   
-  const actionClickHandler = (rowData :RowData) => {
+  const editClickHandler = (rowData :RowData) => {
     console.log("Button clicked for row:", rowData);  };
 
-  const columns = salesColumns(actionClickHandler);
+  const columns = salesColumns(editClickHandler);
 
   return (
     <>

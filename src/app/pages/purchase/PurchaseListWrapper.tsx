@@ -10,28 +10,136 @@ import { UserEditModal } from '../../modules/apps/user-management/users-list/use
 
 
 const ProductList = () => {
-  const {itemIdForUpdate} = useListView()
   const Data = [
-    { id: 1, supliername: 'Mander LLC', invoice: 'INVONb65/9026/2021', purchasePrice: 74823, status: 'Transit' },
-    { id: 2, supliername: 'Sami LLC', invoice: 'INVAQS15/1710/2020', purchasePrice: 2782, status: 'Hold' },
-    { id: 3, supliername: 'Srinivas-Samra', invoice: 'INVdYB14/0789/2022', purchasePrice: 38727, status: 'Transit' },
-    { id: 4, supliername: 'Jha Inc', invoice: 'INVOVS51/0547/2023', purchasePrice: 91365, status: 'Partial Transit' },
-    { id: 5, supliername: 'Dyal-Shan', invoice: 'INVNQj69/3670/2021', purchasePrice: 70293, status: 'Transit' },
-    { id: 6, supliername: 'Ramanathan-Sama', invoice: 'INVuvE93/6554/2021', purchasePrice: 73353, status: 'Transit' },
-    { id: 7, supliername: 'Doctor-Kalita', invoice: 'INVVlf33/0947/2023', purchasePrice: 26414, status: 'Partial Transit' },
-    { id: 8, supliername: 'Ravi, Badami and Tailor', invoice: 'INVFdJ49/5545/2020', purchasePrice: 33744, status: 'Hold' },
-    { id: 9, supliername: 'Bhakta Inc', invoice: 'INVKNV69/6544/2022', purchasePrice: 49021, status: 'Placed' },
-    { id: 10, supliername: 'Biswas Group', invoice: 'INVnhX42/6493/2020', purchasePrice: 29091, status: 'Hold' },
-    { id: 11, supliername: 'Madan-Ganesh', invoice: 'INVwDw22/5249/2023', purchasePrice: 50577, status: 'Partial Transit' },
-    { id: 12, supliername: 'Saran, Sanghvi and Char', invoice: 'INVAdR20/6996/2021', purchasePrice: 68614, status: 'Placed' },
-    { id: 13, supliername: 'Singhal Ltd', invoice: 'INVfNK93/3355/2021', purchasePrice: 21459, status: 'Placed' },
-    { id: 14, supliername: 'Dalal-Comar', invoice: 'INVTIP70/0959/2021', purchasePrice: 50832, status: 'Transit' },
-    { id: 15, supliername: 'Kala Ltd', invoice: 'INVmDZ58/8945/2022', purchasePrice: 84012, status: 'Transit' },
-    { id: 16, supliername: 'Sarraf-Handa', invoice: 'INVHiw65/9351/2022', purchasePrice: 74802, status: 'Hold' },
-    { id: 17, supliername: 'Rajagopalan and Sons', invoice: 'INVhQD52/1191/2020', purchasePrice: 8572, status: 'Placed' },
-    { id: 18, supliername: 'Choudhury PLC', invoice: 'INVlXM87/1728/2022', purchasePrice: 18175, status: 'Partial Transit' },
-    { id: 19, supliername: 'Khatri-Garde', invoice: 'INVUQC67/1217/2021', purchasePrice: 95177, status: 'Partial Transit' },
-    { id: 20, supliername: 'Hari-Seshadri', invoice: 'INVJRI21/2721/2020', purchasePrice: 89348, status: 'Partial Transit' }
+      {
+        purchaseId: "P001",
+        supplier: "Supplier A",
+        payment: "Full",
+        purchaseDate: new Date("2024-01-01"),
+        paidAmount: 1000,
+        balanceAmount: 0,
+        lastDate: null,
+        items: [
+          { ean: "EAN001", qty: 10, price: 50, discount: 5, tax: 10 },
+          { ean: "EAN002", qty: 5, price: 100, discount: 10, tax: 5 }
+        ],
+        totalDiscount: 5,
+        status:'Transit',
+
+        notes: "First purchase"
+      },
+      {
+        purchaseId: "P002",
+        supplier: "Supplier B",
+        payment: "Advance",
+        purchaseDate: new Date("2024-02-15"),
+        paidAmount: 500,
+        balanceAmount: 500,
+        lastDate: new Date("2024-02-25"),
+        items: [
+          { ean: "EAN003", qty: 20, price: 20, discount: 2, tax: 8 },
+          { ean: "EAN004", qty: 15, price: 30, discount: 3, tax: 7 }
+        ],
+        totalDiscount: 10,
+        status:'Transit',
+
+        notes: "Urgent delivery required"
+      },
+      {
+        purchaseId: "P003",
+        supplier: "Supplier C",
+        payment: "Credit",
+        purchaseDate: new Date("2024-03-05"),
+        paidAmount: 0,
+        balanceAmount: 1500,
+        lastDate: new Date("2024-03-20"),
+        items: [
+          { ean: "EAN005", qty: 10, price: 150, discount: 15, tax: 12 }
+        ],
+        totalDiscount: 0,
+        status:'Hold',
+
+        notes: "Repeat order"
+      },
+      {
+        purchaseId: "P004",
+        supplier: "Supplier D",
+        payment: "Full",
+        purchaseDate: new Date("2024-04-10"),
+        paidAmount: 2000,
+        balanceAmount: 0,
+        lastDate: null,
+        items: [
+          { ean: "EAN006", qty: 5, price: 400, discount: 20, tax: 10 }
+        ],
+        totalDiscount: 5,
+        status:'Placed',
+
+        notes: "Special discount applied"
+      },
+      {
+        purchaseId: "P005",
+        supplier: "Supplier E",
+        payment: "Advance",
+        purchaseDate: new Date("2024-05-15"),
+        paidAmount: 750,
+        balanceAmount: 750,
+        lastDate: new Date("2024-05-25"),
+        items: [
+          { ean: "EAN007", qty: 30, price: 25, discount: 5, tax: 9 },
+          { ean: "EAN008", qty: 20, price: 35, discount: 7, tax: 11 }
+        ],
+        totalDiscount: 12,
+        status:'Partial',
+
+        notes: "Delivery to branch office"
+      },
+      {
+        purchaseId: "P006",
+        supplier: "Supplier F",
+        payment: "Credit",
+        purchaseDate: new Date("2024-06-01"),
+        paidAmount: 0,
+        balanceAmount: 1000,
+        lastDate: new Date("2024-06-15"),
+        items: [
+          { ean: "EAN009", qty: 40, price: 10, discount: 1, tax: 5 }
+        ],
+        totalDiscount: 0,
+        status:'Transit',
+        notes: "Order on behalf of subsidiary"
+      },
+      {
+        purchaseId: "P007",
+        supplier: "Supplier G",
+        payment: "Full",
+        purchaseDate: new Date("2024-07-20"),
+        paidAmount: 3000,
+        balanceAmount: 0,
+        lastDate: null,
+        items: [
+          { ean: "EAN010", qty: 25, price: 120, discount: 12, tax: 14 }
+        ],
+        totalDiscount: 8,
+        status:'Transit',
+
+        notes: "High priority order"
+      },
+      {
+        purchaseId: "P008",
+        supplier: "Supplier H",
+        payment: "Advance",
+        purchaseDate: new Date("2024-08-05"),
+        paidAmount: 600,
+        balanceAmount: 400,
+        lastDate: new Date("2024-08-20"),
+        items: [
+          { ean: "EAN011", qty: 50, price: 20, discount: 2, tax: 8 },
+        ],
+        totalDiscount: 7,
+        status:'Hold',
+        notes: "Please ensure quality packaging"
+      }
   ];
   
   
@@ -43,7 +151,6 @@ const ProductList = () => {
       <KTCard>
         <UsersTable column={PurchaseColumns} Data={Data} Title={'Purchase'}/>
       </KTCard>
-      {itemIdForUpdate !== undefined && <UserEditModal />}
     </>
   )
 }

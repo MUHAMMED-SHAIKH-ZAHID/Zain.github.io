@@ -9,7 +9,6 @@ import { UserEditModal } from '../../../modules/apps/user-management/users-list/
 
 
 const SuplierList = () => {
-  const {itemIdForUpdate} = useListView()
 
 const Data = [
     {
@@ -109,7 +108,6 @@ const Data = [
       <KTCard>
         <UsersTable column={productColumns} Data={Data} Title={'Product'} />
       </KTCard>
-      {itemIdForUpdate !== undefined && <UserEditModal />}
     </>
   )
 }

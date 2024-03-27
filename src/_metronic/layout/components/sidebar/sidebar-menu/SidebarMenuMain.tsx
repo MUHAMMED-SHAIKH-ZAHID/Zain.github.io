@@ -15,12 +15,6 @@ const SidebarMenuMain = () => {
         fontIcon='bi-app-indicator'
       />
    
-   <SidebarMenuItem
-     to='/datamanage'
-     icon='data'
-     title='Data Manage'
-     fontIcon='bi-app-indicator'
-   />
             <SidebarMenuItem
               to='/supplier'
               icon='profile-user'
@@ -31,39 +25,40 @@ const SidebarMenuMain = () => {
           
 
         <SidebarMenuItem
-          to='/purchase/data'
+          to='/purchase'
           icon='office-bag'
           title='Purchase'
           fontIcon='bi-app-indicator'
         />
         
 
-          <SidebarMenuItemWithSub
-            to='/user'
+          <SidebarMenuItem
+            to='/user/seller'
             icon='profile-circle'
             title='User'
             fontIcon='bi-app-indicator'
-          >
+           />
+            
                 <SidebarMenuItem
           to='/user/customer'
           title='Customer'
-      hasBullet={true}
+          icon='security-user'
         />
-                <SidebarMenuItem
-          to='/user/seller'
-          title='Sales Executive'
-      hasBullet={true}
-        />
-            </SidebarMenuItemWithSub>
        
 
         <SidebarMenuItem
-          to='/sales/order  '
+          to='/sales'
           icon='binance-usd'
           title='Sales'
           fontIcon='bi-app-indicator'
         />
         
+          <SidebarMenuItem
+            to='/datamanage'
+            icon='data'
+            title='Data Manage'
+            fontIcon='bi-app-indicator'
+          />
      
         
         

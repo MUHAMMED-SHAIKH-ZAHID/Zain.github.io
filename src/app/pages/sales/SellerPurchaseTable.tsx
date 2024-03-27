@@ -4,11 +4,10 @@ import { ListViewProvider, useListView } from '../../modules/apps/user-managemen
 import { KTCard } from '../../../_metronic/helpers'
 import { UsersTable } from '../../modules/apps/user-management/users-list/table/UsersTable'
 import { UserEditModal } from '../../modules/apps/user-management/users-list/user-edit-modal/UserEditModal'
-import { sellerpurchaseColumns, suplierColumns, suplierpurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
+import { sellerpurchaseColumns } from '../../modules/apps/user-management/users-list/table/columns/_columns'
 
 
 const SuplierList = () => {
-    const {itemIdForUpdate} = useListView()
   
     const Data = Array.from({ length: 20 }, (_, index) => ({
         date: new Date(2021, 0, index + 1).toLocaleDateString("en-US"),
@@ -21,7 +20,6 @@ const SuplierList = () => {
         <KTCard>
           <UsersTable column={sellerpurchaseColumns} Data={Data} Title={''} />
         </KTCard>
-        {itemIdForUpdate !== undefined && <UserEditModal />}
       </>
     )
   }

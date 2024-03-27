@@ -2,6 +2,8 @@
 import { KTIcon} from '../../../_metronic/helpers'
 import { PageTitle } from '../../../_metronic/layout/core'
 import TotalPurcahseForSuplier from './TotalPurcahseForSuplier'
+import profilePhoto from '../../../_metronic/assets/custom/user3d.png'
+
 
 
 
@@ -13,12 +15,15 @@ function Details (){
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
           <div className='me-7 mb-4'>
            
-          </div>
+          
 
+          </div>
+          <img src={profilePhoto} alt="" className='h-10 w-10' style={{height:"150px"}}/>
+          
           <div className='flex-grow-1'>
             <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-              <div className='d-flex flex-column'>
-                <div className='d-flex align-items-center mb-2'>
+              <div className='d-flex flex-column pt-16'>
+                <div className='d-flex align-items-center '>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
                     Supplier Name
                   </a>
@@ -37,11 +42,11 @@ function Details (){
                     href='#'
                     className='d-flex align-items-center text-gray-500 text-hover-dark mb-2'
                   >
-                    <KTIcon iconName='sms' className='fs-4 me-1 text-danger' />
+                    <KTIcon iconName='sms' className='fs-4 me-1 text-dark' />
                     suplier@gmail.com
                   </a>
                   </div>
-                  <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
+                  <div className='d-flex flex-wrap fw-bold fs-6  pe-2'>
                   <a
                     href='#'
                     className='d-flex align-items-center text-gray-500 text-hover-dark me-5 mb-2'
@@ -53,7 +58,7 @@ function Details (){
                     href='#'
                     className='d-flex align-items-center text-gray-500 text-hover-dark me-5 mb-2'
                   >
-                    <KTIcon iconName='geolocation' className='fs-4 me-1 text-primary' />
+                    <KTIcon iconName='geolocation' className='fs-4 me-1 text-danger' />
                    Kerala
                   </a>
                 </div>
@@ -115,7 +120,7 @@ function Details (){
             <li className='nav-item'>
            
                <div className={
-                  `nav-link text-active-primary me-6 active`
+                  `nav-link text-active-primary me-6 active cursor-pointer`
 
                 }
                
@@ -131,7 +136,7 @@ function Details (){
       </div>
     </div>
 
-     <div className="my-2 mt-5 fs-3 fw-bold ms-2">Purchase</div>     
+     <div className="my-2 mt-5 fs-3 fw-bold ms-2 ">Purchase</div>     
          <TotalPurcahseForSuplier />
         </>
     )
